@@ -11,18 +11,19 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('support_messages', function (Blueprint $table) {
-            $table->id();
-            $table->unsignedBigInteger('user_id');
-
-            $table->foreign("user_id")
+        //
+        Schema::table("requests", function (Blueprint $table) {
+            $table->foreign("driver_id")
                 ->references("id")
                 ->on("users")
                 ->onUpdate("cascade")
                 ->onDelete("cascade");
 
-            $table->string('message', 255);
-            $table->timestamps();
+            $table->foreign("passenger_id")
+                ->references("id")
+                ->on("users")
+                ->onUpdate("cascade")
+                ->onDelete("cascade");
         });
     }
 
@@ -31,6 +32,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('support_messages');
+        //
     }
 };

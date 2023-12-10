@@ -16,8 +16,8 @@ return new class extends Migration
             $table->string('latitude');
             $table->string('longitude');
             $table->integer('status')->default(0);
-            $table->string('driver_id')->nullable();
-            $table->string('passenger_id');
+            $table->unsignedBigInteger('driver_id')->nullable();
+            $table->unsignedBigInteger('passenger_id');
             $table->timestamps();
         });
     }
