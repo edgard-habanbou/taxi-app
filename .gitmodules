@@ -1,0 +1,3 @@
+[submodule "taxi-app-frontend"]
+    path = taxi-app-frontend
+    url = git@github.com:edgardhab/taxi-app.git
