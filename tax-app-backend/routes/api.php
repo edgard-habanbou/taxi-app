@@ -20,6 +20,8 @@ Route::get('/users', [UserController::class, 'index']);
 Route::post('/login' ,[AuthController::class, 'login']);
 Route::put('/update_user/{id}', [UserController::class, 'update']);
 Route::post('/destroy/{id}' , [UserController::class , 'destroy']);
+Route::put('/update_location/{id}', [UserController::class, 'updateLocation']);
+
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
