@@ -52,7 +52,6 @@ class AuthController extends Controller
             'email' => 'required|string|email|max:255|unique:users',
             'password' => 'required|string|min:6',
         ]);
-
         $user = User::create([
             'email' => $request->email,
             'password' => Hash::make($request->password),
@@ -60,11 +59,6 @@ class AuthController extends Controller
             'lname' => $request->lname,
             'gender' => $request->gender,
             'role_id' => $request->role_id,
-            'latitude' => $request->latitude,
-            'longitude' => $request->longitude,
-            'image_url' => $request->image_url,
-
-
         ]);
 
         $token = Auth::login($user);
