@@ -38,6 +38,7 @@ class User extends Authenticatable implements JWTSubject
     protected $hidden = [
         'password',
         'remember_token',
+        'id',
     ];
 
     /**
@@ -78,14 +79,14 @@ class User extends Authenticatable implements JWTSubject
     }
     public function request()
     {
-        return $this->hasOne(Request::class);
+        return $this->hasOne(UserRequest::class);
     }
     public function tempChat()
     {
-        return $this->hasOne(TempChat::class);
+        return $this->hasMany(TempChat::class);
     }
     public function supportMessage()
     {
-        return $this->hasOne(SupportMessage::class);
+        return $this->hasMany(SupportMessage::class);
     }
 }

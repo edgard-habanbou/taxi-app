@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Driver;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -48,7 +49,7 @@ class AuthController extends Controller
             'fname' => 'required|string|max:255',
             'lname' => 'required|string|max:255',
             'gender' => 'required|integer',
-            'role_id' => 'required|integer',
+            'role_id' => 'required|integer|in:2,3',
             'email' => 'required|string|email|max:255|unique:users',
             'password' => 'required|string|min:6',
         ]);
@@ -60,12 +61,12 @@ class AuthController extends Controller
             'lname' => $request->lname,
             'gender' => $request->gender,
             'role_id' => $request->role_id,
-            'latitude' => $request->latitude,
-            'longitude' => $request->longitude,
-            'image_url' => $request->image_url,
-
-
         ]);
+        if ($request->role_id == 3) {
+            Driver::create([
+                'user_id' => $user->id,
+            ]);
+        }
 
         $token = Auth::login($user);
         return response()->json([
