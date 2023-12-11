@@ -8,7 +8,6 @@ use App\Http\Controllers\SupportMessageController;
 use App\Http\Controllers\TempChatController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\AuthController;
 use App\Http\Controllers\RatingController;
 
 /*
