@@ -29,15 +29,9 @@ const Login = () => {
         }
       )
       .then((res) => {
-        console.log(res);
-        if (res.message === "Unauthorized") {
-          alert("Invalid username or password");
-          setEmail("");
-          setPassword("");
-          return;
-        } else {
-          localStorage.setItem("jwt", res.data.authorisation.token);
-        }
+        localStorage.setItem("jwt", res.data.authorisation.token);
+        localStorage.setItem("user", JSON.stringify(res.data.user));
+        window.location.href = "/chat";
       })
       .catch((err) => {
         alert("Invalid username or password");
