@@ -29,9 +29,9 @@ class UserController extends Controller
             'email' => 'required|email|unique:users',
             'password' => 'required|string|min:6',
             'role_id' => 'required|integer',
-            'latitude' => 'required|string',
-            'longitude' => 'required|string',
-            'image_url' => 'required|string',
+            'latitude' => 'string',
+            'longitude' => 'string',
+            'image_url' => 'string',
             'gender' => 'required|integer',
         ]);
 
@@ -50,9 +50,9 @@ class UserController extends Controller
             'email' => 'required|email|unique:users,email,' .$id,
             'role_id' => 'required|integer',
             'password' => 'required|string|min:6',
-            'latitude' => 'required|string',
-            'longitude' => 'required|string',
-            'image_url' => 'required|string',
+            'latitude' => 'string',
+            'longitude' => 'string',
+            'image_url' => 'string',
             'gender' => 'required|integer',
         ]);
 
@@ -64,14 +64,14 @@ class UserController extends Controller
         return response()->json($user);
     }
 
-    public function updateLocation(Request $request, $id)
+    public function updateLocation(Request $request)
     {
         $validatedData = $request->validate([
             'latitude' => 'required|string',
             'longitude' => 'required|string',
         ]);
     
-        $user = User::findOrFail($id);
+        $user = User::findOrFail($request->id);
     
         $user->update([
             'latitude' => $validatedData['latitude'],
