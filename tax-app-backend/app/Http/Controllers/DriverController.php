@@ -12,19 +12,29 @@ class DriverController extends Controller
         $this->middleware('auth:api');
     }
 
-    public function acceptDriver($driverId)
-    {
-        $driver = Driver::findOrFail($driverId);
-        $driver->update(['accepted' => true]);
+  // Get all drivers
+  public function index()
+  {
+      $drivers = Driver::all();
+      return response()->json($drivers);
+  }
 
-        return response()->json($driver);
-    }
+  // Update driver information
+  public function update(Request $request)
+  {
+      // Validate the request data
+      $validatedData = $request->validate([
+          'accepted' => 'required|integer',
+          'busy' => 'required|integer',
+      ]);
 
-    public function rejectDriver($driverId)
-    {
-        $driver = Driver::findOrFail($driverId);
-        $driver->delete();
+      // Find the driver by ID
+      $driver = Driver::findOrFail($request->id);
 
-        return response()->json(null, 204);
-    }
+      // Update the driver information
+      $driver->update($validatedData);
+
+      return response()->json($driver);
+  }
+
 }
