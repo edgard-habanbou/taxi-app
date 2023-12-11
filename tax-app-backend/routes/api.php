@@ -25,6 +25,7 @@ Route::controller(AuthController::class)->group(function () {
     Route::post('register', 'register');
     Route::post('logout', 'logout');
     Route::post('refresh', 'refresh');
+    Route::post('upload_image','upload_image');
 });
 
 Route::get('/get_ratings/{user_id}',[RatingController::class,'get_ratings']);
