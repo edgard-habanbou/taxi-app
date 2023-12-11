@@ -20,13 +20,13 @@ class RequestController extends Controller
             return response()->json($request);
         }
     
-        public function createRequest(Request $request, $id)
+        public function createRequest(Request $request)
         {
             $validatedData = $request->validate([
                 'latitude' => 'required|string',
                 'longitude' => 'required|string',
                 'status' => 'required|integer',
-                'passenger_id' => 'required|integer'.$id
+                'passenger_id' => 'required|integer'
               ]);
     
             $request = Request::create($validatedData);
@@ -34,17 +34,20 @@ class RequestController extends Controller
             return response()->json($user, 201);
         }
     
-        public function updateRequest(Request $request, $id)
+        public function updateLocation(Request $request)
         {
             $validatedData = $request->validate([
-
+                'latitude' => 'required|string',
+                'longitude' => 'required|string',
             ]);
-    
-            $request = Request::findOrFail($id);
-
-    
-            $request->update($validatedData);
-    
+        
+            $request = Request::findOrFail($request->id);
+        
+            $request->update([
+                'latitude' => $validatedData['latitude'],
+                'longitude' => $validatedData['longitude'],
+            ]);
+        
             return response()->json($request);
         }
     
