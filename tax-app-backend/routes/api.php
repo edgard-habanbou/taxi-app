@@ -43,7 +43,7 @@ Route::post('/create_request', [RequestController::class, 'createRequest']);
 Route::post('/update_request_status', [RequestController::class, 'updateStatus']);
 Route::post('/update_request_driver', [RequestController::class, 'updateDriver']);
 Route::get('/messages/{id}', [TempChatController::class, 'fetchMessages']);
-Route::post('/messages', [TempChatController::class, 'sendMessage']);
+Route::post('/messages/{id}', [TempChatController::class, 'sendMessage']);
 
 Route::get('/support/{id}', [SupportMessageController::class, 'fetchMessages']);
 Route::post('/support', [SupportMessageController::class, 'sendMessage']);
