@@ -25,14 +25,14 @@ class TempChatController extends Controller
             ->get();
     }
 
-    public function sendMessage(Request $request)
+    public function sendMessage(Request $request, $id)
     {
         $user = Auth::user();
 
         $user->tempChat()->create([
             'message' => $request->input('message'),
             'user_id' => $user->id,
-            'request_id' => $request->request_id,
+            'request_id' => $id,
 
         ]);
         return ['status' => 'Message Sent!'];

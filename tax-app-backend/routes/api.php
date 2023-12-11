@@ -24,7 +24,7 @@ Route::controller(AuthController::class)->group(function () {
     Route::post('refresh', 'refresh');
 });
 Route::get('/messages/{id}', [TempChatController::class, 'fetchMessages']);
-Route::post('/messages', [TempChatController::class, 'sendMessage']);
+Route::post('/messages/{id}', [TempChatController::class, 'sendMessage']);
 
 Route::get('/support/{id}', [SupportMessageController::class, 'fetchMessages']);
 Route::post('/support', [SupportMessageController::class, 'sendMessage']);
