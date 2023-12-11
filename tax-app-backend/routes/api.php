@@ -23,7 +23,7 @@ Route::put('/update_user', [UserController::class, 'update']);
 Route::post('/destroy' , [UserController::class , 'destroy']);
 Route::post('/update_location', [UserController::class, 'updateLocation']);
 
-Route::put('/update_status' , [DriverController::class , 'update']);
+Route::post('/update_status' , [DriverController::class , 'update']);
 
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
