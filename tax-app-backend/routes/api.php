@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\SupportMessageController;
 use App\Http\Controllers\TempChatController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -43,3 +44,6 @@ Route::post('/update_request_status', [RequestController::class, 'updateStatus']
 Route::post('/update_request_driver', [RequestController::class, 'updateDriver']);
 Route::get('/messages/{id}', [TempChatController::class, 'fetchMessages']);
 Route::post('/messages', [TempChatController::class, 'sendMessage']);
+
+Route::get('/support/{id}', [SupportMessageController::class, 'fetchMessages']);
+Route::post('/support', [SupportMessageController::class, 'sendMessage']);
