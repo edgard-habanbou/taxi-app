@@ -19,8 +19,8 @@ use App\Http\Controllers\DriverController;
 Route::post('/register',[UserController::class, 'store']);
 Route::get('/users', [UserController::class, 'index']);
 Route::post('/login' ,[AuthController::class, 'login']);
-Route::put('/update_user/{id}', [UserController::class, 'update']);
-Route::post('/destroy/{id}' , [UserController::class , 'destroy']);
+Route::put('/update_user', [UserController::class, 'update']);
+Route::post('/destroy' , [UserController::class , 'destroy']);
 Route::post('/update_location', [UserController::class, 'updateLocation']);
 
 Route::put('/update_status' , [DriverController::class , 'update']);

@@ -42,12 +42,12 @@ class UserController extends Controller
         return response()->json($user, 201);
     }
 
-    public function update(Request $request, $id)
+    public function update(Request $request)
     {
         $validatedData = $request->validate([
             'fname' => 'required|string',
             'lname' => 'required|string',
-            'email' => 'required|email|unique:users,email,' .$id,
+            'email' => 'required|email|unique:users,email,',
             'role_id' => 'required|integer',
             'password' => 'required|string|min:6',
             'latitude' => 'string',
@@ -56,7 +56,7 @@ class UserController extends Controller
             'gender' => 'required|integer',
         ]);
 
-        $user = User::findOrFail($id);
+        $user = User::findOrFail($request->id);
         $validatedData['password'] = Hash::make($validatedData['password']);
 
         $user->update($validatedData);
@@ -82,9 +82,9 @@ class UserController extends Controller
     }
 
 
-    public function destroy($id)
+    public function destroy(Request $request)
     {
-        $user = User::findOrFail($id);
+        $user = User::findOrFail($request->id);
         $user->delete();
 
         return response()->json(null, 204);
