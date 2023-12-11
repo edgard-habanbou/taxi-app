@@ -29,17 +29,22 @@ const Login = () => {
         }
       )
       .then((res) => {
-        if (res.data.authorisation === undefined) {
+        console.log(res);
+        if (res.message === "Unauthorized") {
           alert("Invalid username or password");
           setEmail("");
           setPassword("");
           return;
         } else {
           localStorage.setItem("jwt", res.data.authorisation.token);
-          window.location.href = "/chat";
         }
       })
-      .catch((err) => console.log(err));
+      .catch((err) => {
+        alert("Invalid username or password");
+        setEmail("");
+        setPassword("");
+        return;
+      });
   };
 
   return (
