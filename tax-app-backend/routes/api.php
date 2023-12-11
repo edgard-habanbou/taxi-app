@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\SupportMessageController;
 use App\Http\Controllers\TempChatController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -24,3 +25,6 @@ Route::controller(AuthController::class)->group(function () {
 });
 Route::get('/messages/{id}', [TempChatController::class, 'fetchMessages']);
 Route::post('/messages', [TempChatController::class, 'sendMessage']);
+
+Route::get('/support/{id}', [SupportMessageController::class, 'fetchMessages']);
+Route::post('/support', [SupportMessageController::class, 'sendMessage']);

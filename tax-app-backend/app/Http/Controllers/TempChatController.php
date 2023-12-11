@@ -20,7 +20,7 @@ class TempChatController extends Controller
         return DB::table('temp_chats')
             ->where('request_id', $id)
             ->join('users', 'temp_chats.user_id', '=', 'users.id')
-            ->select('temp_chats.*', 'users.fname', 'users.lname', 'users.image_url')
+            ->select('temp_chats.message', 'temp_chats.created_at', 'users.fname', 'users.lname', 'users.image_url')
             ->orderBy('created_at', 'asc')
             ->get();
     }
