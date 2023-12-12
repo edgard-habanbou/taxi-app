@@ -19,7 +19,11 @@ const Login = () => {
   const handlePasswordChange = (event) => {
     setPassword(event.target.value)
   }
-
+  const handleKeyPress = (event) => {
+    if (event.key === 'Enter') {
+      loginHandler()
+    }
+  }
   const loginHandler = () => {
     if (email == '' || password == '') {
       alert('Please enter email and password')
@@ -57,14 +61,20 @@ const Login = () => {
   }
   return (
     <div className="auth">
-      <div className="form">
-        <TextInput placeholder="email" value={email} onChange={handleEmailChange} />
+      <div className="form flex column gap">
+        <TextInput
+          placeholder="email"
+          value={email}
+          onChange={handleEmailChange}
+          onKeyDown={handleKeyPress}
+        />
 
         <TextInput
           placeholder="password"
           type="password"
           value={password}
           onChange={handlePasswordChange}
+          onKeyDown={handleKeyPress}
         />
         <div className="flex center">
           <Button
