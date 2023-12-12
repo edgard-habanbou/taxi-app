@@ -21,10 +21,6 @@ use App\Http\Controllers\RatingController;
 |
 */
 
-
-
-
-
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
@@ -34,13 +30,14 @@ Route::controller(AuthController::class)->group(function () {
     Route::post('register', 'register');
     Route::post('logout', 'logout');
     Route::post('refresh', 'refresh');
-    Route::post('upload_image','upload_image');
+    Route::post('upload_image', 'upload_image');
 });
 
-Route::get('/get_ratings/{user_id}',[RatingController::class,'get_ratings']);
-Route::post('/add_rating',[RatingController::class,'add_rating']);
-Route::delete('/delete_rating/{rating_id}',[RatingController::class,'delete_rating']);
-Route::patch('/update_rating/{rating_id}',[RatingController::class,'update_rating']);
+Route::get('/get_ratings/{user_id}', [RatingController::class, 'get_ratings']);
+Route::post('/add_rating', [RatingController::class, 'add_rating']);
+Route::delete('/delete_rating/{rating_id}', [RatingController::class, 'delete_rating']);
+Route::patch('/update_rating/{rating_id}', [RatingController::class, 'update_rating']);
+
 Route::get('/messages/{id}', [TempChatController::class, 'fetchMessages']);
 Route::post('/messages/{id}', [TempChatController::class, 'sendMessage']);
 
@@ -60,3 +57,4 @@ Route::post('/destroy', [UserController::class, 'destroy']);
 Route::post('/update_location', [UserController::class, 'updateLocation']);
 
 Route::post('/update_status', [DriverController::class, 'update']);
+Route::post('/getpendingdrivers', [DriverController::class, 'getPendingDrivers']);
