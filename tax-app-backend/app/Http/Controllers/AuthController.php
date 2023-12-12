@@ -65,7 +65,7 @@ class AuthController extends Controller
             'role_id' => $request->role_id,
             'latitude' => $request->latitude,
             'longitude' => $request->longitude,
-            'image_url' => $imageUrl,
+            'image_url' => $request->imageUrl,
         ]);
         if ($request->role_id == 3) {
             Driver::create([

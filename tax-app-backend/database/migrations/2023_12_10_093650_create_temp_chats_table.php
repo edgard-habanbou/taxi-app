@@ -22,7 +22,7 @@ return new class extends Migration
             $table->unsignedBigInteger('request_id');
             $table->foreign("request_id")
                 ->references("id")
-                ->on("user_requests")
+                ->on("requests")
                 ->onUpdate("cascade")
                 ->onDelete("cascade");
             $table->string('message', 255);

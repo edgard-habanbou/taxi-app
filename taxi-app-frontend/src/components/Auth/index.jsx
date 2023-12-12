@@ -5,29 +5,73 @@ import "./index.css";
 import { authActions } from "../../store/auth";
 import TextInput from "../input";
 
+import axios from "axios";
+
 const Auth = () => {
   const dispatch = useDispatch();
 
-  const loginHandler = (event) => {
-    event.preventDefault();
-
-    dispatch(authActions.login());
-  };
-
   const [isSignUp, setIsSignUp] = useState(false);
-  const [firstName, setFirstName] = useState("");
-  const [lastName, setLastName] = useState("");
+  const [fname, setFirstName] = useState("");
+  const [lname, setLastName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [gender, setGender] = useState("");
-  const [role, setRole] = useState("");
+  const [gender, setGender] = useState("1");
+  const [role_id, setRole] = useState("2");
 
-  const toggleSignUpHandler = () => {
-    setIsSignUp((prevState) => !prevState);
+  const loginHandler = async (event) => {
+    event.preventDefault();
+    axios
+      .post(
+        "http://localhost:8000/api/login",
+        { email, password },
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      )
+      .then((res) => {
+        localStorage.setItem("jwt", res.data.authorisation.token);
+        const auth = JSON.stringify(res.data.user);
+        localStorage.setItem("user", auth);
+        console.log(auth);
+        dispatch(authActions.login());
+      })
+      .catch((err) => {
+        alert("Invalid username or password");
+        setEmail("");
+        setPassword("");
+        return;
+      });
   };
 
   const signUpHandler = (event) => {
     event.preventDefault();
+    axios
+      .post(
+        "http://localhost:8000/api/register",
+        { fname, lname, gender, role_id, email, password },
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      )
+      .then((res) => {
+        localStorage.setItem("jwt", res.data.authorisation.token);
+        localStorage.setItem("user", JSON.stringify(res.data.user));
+        dispatch(authActions.login());
+      })
+      .catch((err) => {
+        alert("Invalid username or password");
+        // setEmail("");
+        // setPassword("");
+        return;
+      });
+  };
+
+  const toggleSignUpHandler = () => {
+    setIsSignUp((prevState) => !prevState);
   };
 
   const handleFirstNameChange = (event) => {
@@ -48,10 +92,12 @@ const Auth = () => {
 
   const handleGenderChange = (event) => {
     setGender(event.target.value);
+    console.log(gender);
   };
 
   const handleRoleChange = (event) => {
     setRole(event.target.value);
+    console.log(role_id);
   };
 
   return (
@@ -61,12 +107,12 @@ const Auth = () => {
           <>
             <TextInput
               placeholder="First Name"
-              value={firstName}
+              value={fname}
               onChange={handleFirstNameChange}
             />
             <TextInput
               placeholder="Last Name"
-              value={lastName}
+              value={lname}
               onChange={handleLastNameChange}
             />
             <TextInput
@@ -85,8 +131,7 @@ const Auth = () => {
                 <input
                   type="radio"
                   name="gender"
-                  value="male"
-                  checked={gender === "male"}
+                  value="1"
                   onChange={handleGenderChange}
                 />
                 Male
@@ -95,8 +140,7 @@ const Auth = () => {
                 <input
                   type="radio"
                   name="gender"
-                  value="female"
-                  checked={gender === "female"}
+                  value="0"
                   onChange={handleGenderChange}
                 />
                 Female
@@ -107,8 +151,7 @@ const Auth = () => {
                 <input
                   type="radio"
                   name="role"
-                  value="passenger"
-                  checked={role === "passenger"}
+                  value="2"
                   onChange={handleRoleChange}
                 />
                 Passenger
@@ -117,8 +160,7 @@ const Auth = () => {
                 <input
                   type="radio"
                   name="role"
-                  value="driver"
-                  checked={role === "driver"}
+                  value="3"
                   onChange={handleRoleChange}
                 />
                 Driver

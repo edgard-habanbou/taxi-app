@@ -11,6 +11,8 @@ const Header = () => {
   const isAuth = useSelector((state) => state.auth.isAuthenticated);
 
   const logoutHandler = () => {
+    localStorage.removeItem("jwt");
+    localStorage.removeItem("user");
     dispatch(authActions.logout());
   };
 

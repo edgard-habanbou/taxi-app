@@ -6,9 +6,11 @@ import Auth from "./components/Auth";
 import UserProfile from "./components/userProfile/UserProfile";
 import Passenger from "./pages/passenger";
 import Driver from "./pages/driver";
+import ChatM from "./pages/ChatM";
 
 function App() {
   const isAuth = useSelector((state) => state.auth.isAuthenticated);
+  const user = useSelector((state) => state.auth.user);
 
   return (
     <>
@@ -24,8 +26,9 @@ function App() {
               </>
             }
           ></Route>
-          <Route path="/passenger" element={<Passenger></Passenger>} />
-          <Route path="/driver" element={<Driver></Driver>} />
+          <Route path="/passenger" element={<Passenger />} />
+          <Route path="/driver" element={<Driver />} />
+          <Route path="/chat" element={<ChatM />} />
         </Routes>
       </Router>
     </>

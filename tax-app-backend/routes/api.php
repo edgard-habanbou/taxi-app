@@ -58,6 +58,7 @@ Route::post('/user-requests/cancel', [RequestController::class, 'cancelRequest']
 Route::get('/user-requests/status-1', [RequestController::class, 'getRequestsStatusOne']);
 // Route for checking passenger requests
 Route::get('/user-requests/checkDriverStatus', [RequestController::class, 'checkDriverStatus']);
+Route::get('/user-request/active', [RequestController::class, 'getUserActiveRequests']);
 
 
 
@@ -68,3 +69,4 @@ Route::post('/destroy', [UserController::class, 'destroy']);
 Route::post('/update_location', [UserController::class, 'updateLocation']);
 
 Route::post('/update_status', [DriverController::class, 'update']);
+Route::get('/verify', [UserController::class, 'verify']);

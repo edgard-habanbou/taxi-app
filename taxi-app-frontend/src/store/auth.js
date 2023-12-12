@@ -1,9 +1,21 @@
 import { createSlice } from "@reduxjs/toolkit";
 
+const localUser = localStorage.getItem("user");
+let user = null;
+let auth = false;
+
+if (localUser) {
+  user = {
+    role_id: localUser.role_id,
+    latitude: localUser.latitude,
+    longitude: localUser.longitude,
+  };
+  auth = true;
+}
+
 const initialAuthState = {
-  isAuthenticated: false,
-  isDriver: false,
-  currentRequestId: null,
+  isAuthenticated: auth,
+  user: user,
 };
 
 const authSlice = createSlice({
@@ -16,14 +28,8 @@ const authSlice = createSlice({
     logout(state) {
       state.isAuthenticated = false;
     },
-    setIsDriver(state) {
-      state.isDriver = true;
-    },
-    setIsPassenger(state) {
-      state.isDriver = false;
-    },
-    setCurrentRequestId(state, action) {
-      state.currentRequestId = action.payload;
+    setUser(state, action) {
+      state.user = action.payload;
     },
   },
 });
