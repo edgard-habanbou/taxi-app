@@ -47,10 +47,18 @@ Route::post('/messages/{id}', [TempChatController::class, 'sendMessage']);
 Route::get('/support/{id}', [SupportMessageController::class, 'fetchMessages']);
 Route::post('/support', [SupportMessageController::class, 'sendMessage']);
 
-Route::post('/update_request_location', [RequestController::class, 'updateLocation']);
-Route::post('/create_request', [RequestController::class, 'createRequest']);
-Route::post('/update_request_status', [RequestController::class, 'updateStatus']);
-Route::post('/update_request_driver', [RequestController::class, 'updateDriver']);
+
+// Route for creating a user request
+Route::post('/user-requests/create', [RequestController::class, 'createRequest']);
+// Route for updating request with driver
+Route::post('/user-requests/update-with-driver', [RequestController::class, 'updateRequestWithDriver']);
+// Route for canceling a request
+Route::post('/user-requests/cancel', [RequestController::class, 'cancelRequest']);
+// Route for getting all requests with status 1
+Route::get('/user-requests/status-1', [RequestController::class, 'getRequestsStatusOne']);
+// Route for checking passenger requests
+Route::get('/user-requests/checkDriverStatus', [RequestController::class, 'checkDriverStatus']);
+
 
 
 // Route::post('/register', [UserController::class, 'store']);
