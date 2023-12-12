@@ -5,3 +5,18 @@
 .grey {
   background-color: grey;
 }
+.btn {
+  border: 1px solid black;
+  border-radius: 5px;
+  padding: 5px;
+  margin: 5px;
+  cursor: pointer;
+  font-size: 1.2em;
+  font-weight: bold;
+  text-align: center;
+  width: 50%;
+  height: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
