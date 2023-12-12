@@ -60,3 +60,6 @@
 .grey {
   background-color: grey;
 }
+.btn-selected {
+  opacity: 0.5;
+}

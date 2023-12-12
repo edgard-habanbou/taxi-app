@@ -1,12 +1,25 @@
 import './index.css'
 import Button from '../button'
 import taxiImage from '../../assets/images/taxi.png'
+import { useNavigate } from 'react-router-dom'
 
 const Header = () => {
-  const logoutHandler = () => {
-    console.log('logout')
+  const navigate = useNavigate()
+
+  const navigateTo = (index) => {
+    if (index === 0) {
+      navigate('/user-management')
+    } else if (index === 1) {
+      navigate('/stats')
+    } else if (index === 2) {
+      navigate('/support')
+    }
   }
-  const isAuth = true
+  const logoutHandler = () => {
+    localStorage.removeItem('jwt')
+    localStorage.removeItem('user')
+    navigate('/')
+  }
 
   return (
     <header className="header">
@@ -14,14 +27,38 @@ const Header = () => {
         <img src={taxiImage} alt="" />
       </div>
 
-      {isAuth && (
+      {
         <nav>
           <ul>
             <li>
-              <Button className="grey">Profile</Button>
+              <Button
+                onClick={() => {
+                  navigateTo(0)
+                }}
+                className="grey"
+              >
+                User Managment
+              </Button>
             </li>
             <li>
-              <Button className="grey">Rides</Button>
+              <Button
+                onClick={() => {
+                  navigateTo(1)
+                }}
+                className="grey"
+              >
+                Stats
+              </Button>
+            </li>
+            <li>
+              <Button
+                onClick={() => {
+                  navigateTo(2)
+                }}
+                className="grey"
+              >
+                Support
+              </Button>
             </li>
             <li>
               <Button className="red" onClick={logoutHandler}>
@@ -30,7 +67,7 @@ const Header = () => {
             </li>
           </ul>
         </nav>
-      )}
+      }
     </header>
   )
 }

@@ -1,12 +1,12 @@
 import Header from '../../components/Header'
 
-function HomePage() {
+function UserManagment() {
   return (
     <div>
       <Header />
-      <h1>Home Page</h1>
+      <h1>User Managment</h1>
     </div>
   )
 }
 
-export default HomePage
+export default UserManagment

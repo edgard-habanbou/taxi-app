@@ -1,5 +1,8 @@
 import Login from './pages/Login/index'
-import HomePage from './pages/HomePage'
+import UserManagment from './pages/UserManagment'
+import Stats from './pages/Stats'
+import Support from './pages/Support'
+
 import { Route, Routes } from 'react-router-dom'
 import './App.css'
 
@@ -8,7 +11,9 @@ function App() {
     <div>
       <Routes>
         <Route path="/" element={<Login />} />
-        <Route path="/home" element={<HomePage />} />
+        <Route path="/user-management" element={<UserManagment />} />
+        <Route path="/stats" element={<Stats />} />
+        <Route path="/support" element={<Support />} />
       </Routes>
     </div>
   )

@@ -3,14 +3,14 @@ import axios from 'axios'
 
 import './index.css'
 import TextInput from '../../components/InputText'
-import Button from '../../components/Button'
+import Button from '../../components/button'
 import { useNavigate } from 'react-router-dom'
 
 const Login = () => {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [loading, setLoading] = useState(false)
-  const navigate = useNavigate() // Use useHistory hook
+  const navigate = useNavigate()
 
   const handleEmailChange = (event) => {
     setEmail(event.target.value)
@@ -22,8 +22,7 @@ const Login = () => {
 
   const loginHandler = () => {
     if (email == '' || password == '') {
-      alert('Please enter your email and password')
-      return
+      alert('Please enter email and password')
     } else {
       setLoading(true)
       axios
@@ -40,23 +39,16 @@ const Login = () => {
           }
         )
         .then((res) => {
-          console.log(res)
           if (res.data.user.role_id == 1) {
             localStorage.setItem('jwt', res.data.authorisation.token)
             localStorage.setItem('user', JSON.stringify(res.data.user))
-            navigate('/home')
+            navigate('/user-management')
           } else {
-            alert('Unauthorized')
-            setEmail('')
-            setPassword('')
-            return
+            alert('You are not an admin')
           }
         })
         .catch(() => {
           alert('Invalid username or password')
-          setEmail('')
-          setPassword('')
-          return
         })
         .finally(() => {
           setLoading(false)
