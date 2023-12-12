@@ -69,7 +69,7 @@ const Login = () => {
         <div className="flex center">
           <Button
             onClick={loginHandler}
-            className={`btn ${loading ? 'grey' : ''}`}
+            className={`btn green ${loading ? 'grey' : ''}`}
             disabled={loading}
           >
             {loading ? 'Logging in...' : 'Login'}

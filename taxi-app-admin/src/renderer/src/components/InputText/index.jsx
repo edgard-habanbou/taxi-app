@@ -1,16 +1,15 @@
-import React from "react";
-import "./index.css";
-const TextInput = ({ placeholder, onChange, type = "text" }) => {
+import PropTypes from 'prop-types'
+import './index.css'
+const TextInput = ({ placeholder, onChange, type = 'text' }) => {
   return (
     <div className="input-wrapper">
-      <input
-        type={type}
-        className="modern-input"
-        placeholder={placeholder}
-        onChange={onChange}
-      />
+      <input type={type} className="modern-input" placeholder={placeholder} onChange={onChange} />
     </div>
-  );
-};
-
-export default TextInput;
+  )
+}
+TextInput.propTypes = {
+  placeholder: PropTypes.string,
+  onChange: PropTypes.func,
+  type: PropTypes.string
+}
+export default TextInput
