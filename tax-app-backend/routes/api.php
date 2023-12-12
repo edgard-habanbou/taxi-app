@@ -9,6 +9,7 @@ use App\Http\Controllers\TempChatController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\RatingController;
+use App\Http\Controllers\StatsController;
 
 /*
 |--------------------------------------------------------------------------
@@ -58,3 +59,5 @@ Route::post('/update_location', [UserController::class, 'updateLocation']);
 
 Route::post('/update_status', [DriverController::class, 'update']);
 Route::post('/getpendingdrivers', [DriverController::class, 'getPendingDrivers']);
+
+Route::post('/getstats', [StatsController::class, 'getStats']);
