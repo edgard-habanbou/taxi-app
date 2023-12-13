@@ -1,0 +1,36 @@
+.wrapper {
+  padding: 20px;
+  border-radius: 5px;
+  background-color: #d9d9d9;
+  width: 70%;
+  height: 50%;
+}
+.content {
+  background-color: #878787;
+  padding: 20px;
+  border-radius: 5px;
+  height: 100%;
+  overflow-y: auto;
+}
+.full-page {
+  height: 88vh;
+  width: 100vw;
+}
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #5c5c5c;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #242424;
+}

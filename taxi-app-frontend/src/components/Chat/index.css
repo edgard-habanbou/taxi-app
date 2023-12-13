@@ -1,0 +1,31 @@
+.container {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  max-height: calc(100vh - 5rem);
+  overflow: hidden;
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  background-color: white;
+  position: relative;
+}
+
+.card-body {
+  overflow-y: auto;
+  margin: 0 20px;
+  max-height: calc(100vh - 8rem);
+}
+
+.card-footer {
+  background-color: white;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+}
+
+.card-body::-webkit-scrollbar {
+  width: 0.5em;
+}

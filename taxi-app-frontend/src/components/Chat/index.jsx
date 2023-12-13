@@ -4,14 +4,14 @@
 import React from "react";
 import ChatMessages from "../ChatMessages";
 import ChatForm from "../ChatForm";
+import "./index.css"
 
 const Chat = ({ messages, addMessage, user }) => {
   return (
     <div className="container">
-      <div className="card">
-        <div className="card-header">Chats</div>
+      <div className="card" >
         <div className="card-body">
-          <ChatMessages messages={messages} />
+          <ChatMessages messages={messages}/>
         </div>
         <div className="card-footer">
           <ChatForm onMessageSent={addMessage} user={user} />

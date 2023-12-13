@@ -1,5 +1,6 @@
 // components/ChatForm.jsx
 import React, { useState } from "react";
+import "./index.css";
 
 const ChatForm = ({ user, onMessageSent }) => {
   const [newMessage, setNewMessage] = useState("");
@@ -20,7 +21,7 @@ const ChatForm = ({ user, onMessageSent }) => {
         id="btn-input"
         type="text"
         name="message"
-        className="form-control input-sm"
+        className="form-control input-sm message"
         placeholder="Type your message here..."
         value={newMessage}
         onChange={(e) => setNewMessage(e.target.value)}
@@ -28,7 +29,7 @@ const ChatForm = ({ user, onMessageSent }) => {
       />
       <span className="input-group-btn">
         <button
-          className="btn btn-primary btn-sm"
+          className="buton btn btn-primary btn-sm"
           id="btn-chat"
           onClick={sendMessage}
         >

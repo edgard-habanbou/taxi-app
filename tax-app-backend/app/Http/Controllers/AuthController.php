@@ -52,7 +52,7 @@ class AuthController extends Controller
             'role_id' => 'required|integer|in:2,3',
             'email' => 'required|string|email|max:255|unique:users',
             'password' => 'required|string|min:6',
-            'image_url' => 'image|mimes:jpeg,png,jpg,gif|max:2048',
+            // 'image_url' => 'image|mimes:jpeg,png,jpg,gif|max:2048',
         ]);
 
 

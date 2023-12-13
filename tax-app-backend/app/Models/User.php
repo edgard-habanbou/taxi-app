@@ -24,6 +24,7 @@ class User extends Authenticatable implements JWTSubject
         'gender',
         'password',
         'role_id',
+        'gender',
         'latitude',
         'longitude',
         'image_url',
@@ -39,7 +40,6 @@ class User extends Authenticatable implements JWTSubject
     protected $hidden = [
         'password',
         'remember_token',
-        'id',
     ];
 
     /**
@@ -89,5 +89,9 @@ class User extends Authenticatable implements JWTSubject
     public function supportMessage()
     {
         return $this->hasMany(SupportMessage::class);
+    }
+    public function adminChat()
+    {
+        return $this->hasMany(AdminChat::class);
     }
 }

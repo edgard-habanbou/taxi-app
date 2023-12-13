@@ -20,7 +20,7 @@ class TempChatController extends Controller
         return DB::table('temp_chats')
             ->where('request_id', $id)
             ->join('users', 'temp_chats.user_id', '=', 'users.id')
-            ->select('temp_chats.message', 'temp_chats.created_at', 'users.fname', 'users.lname', 'users.image_url')
+            ->select('temp_chats.message', 'temp_chats.created_at', 'temp_chats.user_id','users.fname', 'users.lname', 'users.image_url')
             ->orderBy('created_at', 'asc')
             ->get();
     }
@@ -28,7 +28,9 @@ class TempChatController extends Controller
     public function sendMessage(Request $request, $id)
     {
         $user = Auth::user();
-
+        $request->validate([
+            'message' => 'required|string|max:255',
+        ]);
         $user->tempChat()->create([
             'message' => $request->input('message'),
             'user_id' => $user->id,
