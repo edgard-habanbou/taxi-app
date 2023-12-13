@@ -15,25 +15,25 @@ ul.chat {
     text-align: right;
   }
   
-  li {
+  .list-el {
     font-size: large;
     font-style: sans-serif;
     width: 50%;
     margin-bottom: 5px;
   }
 
-  li .clearfix {
+  .list-el .clearfix {
     padding: 0 10px;
     padding: 10px;
   }
 
-  img{
+  .chat-img{
     border-radius: 50%;
     width:70%;
     
   }
 
-  .user p {
+  .user .user-name {
     font-size: small;
   }
 
@@ -48,7 +48,7 @@ ul.chat {
     align-items: center;
   }
   
-  .left .message-info .pp img {
+  .left .message-info .pp .chat-img {
     margin-right: 10px;
   }
   
@@ -57,7 +57,7 @@ ul.chat {
     align-items: center;
   }
   
-  .right .message-info .pp img {
+  .right .message-info .pp .chat-img {
     margin-left: 10px;
   }
 

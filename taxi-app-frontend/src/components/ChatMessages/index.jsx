@@ -12,14 +12,14 @@ const ChatMessages = ({ messages }) => {
         let user_id = message.user_id;
         const isCurrentUser = user_id === user.id ? "right" : "left";    
         return ( 
-        <li className={isCurrentUser} key={index}>
+        <li className={`${isCurrentUser} list-el`}  key={index}>
           <div className="clearfix"> 
             <div className="message-info">
               <div className="pp">
-                <img src ={message.image_url}/>
+                <img src ={message.image_url} className="chat-img"/>
               </div>
               <div className="user">
-              <p>{message.fname + " " + message.lname}</p>
+              <p className="user-name">{message.fname + " " + message.lname}</p>
               </div>
             </div>
             <p>{message.message}</p>

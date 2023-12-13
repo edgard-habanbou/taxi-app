@@ -1,4 +1,4 @@
-input {
+.message {
     width : 90%;
     height: 40px;
     margin: 20px 0;
@@ -12,25 +12,25 @@ input {
     font-size: 16px;
 }
 
-button {
+.button {
     margin-left: 20px;
     height: 40px;
     background: #000;
 }
-input-group {
+/* input-group {
     text-align: center;
-}
+} */
 
-input:focus {
+.message:focus {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
   
-input::placeholder {
+.message::placeholder {
     color: #a0a0a0;
 }
   
 
-input:focus {
+.message:focus {
     animation: input-focus-animation 0.3s ease;
 }
 
