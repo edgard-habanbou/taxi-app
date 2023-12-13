@@ -28,7 +28,9 @@ class TempChatController extends Controller
     public function sendMessage(Request $request, $id)
     {
         $user = Auth::user();
-
+        $request->validate([
+            'message' => 'required|string|max:255',
+        ]);
         $user->tempChat()->create([
             'message' => $request->input('message'),
             'user_id' => $user->id,

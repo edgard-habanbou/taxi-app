@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\RequestController;
 use App\Http\Controllers\RatingController;
+use App\Http\Controllers\StatsController;
 
 /*
 |--------------------------------------------------------------------------
@@ -26,7 +27,27 @@ Route::controller(AuthController::class)->group(function () {
     Route::post('logout', 'logout');
     Route::post('refresh', 'refresh');
     Route::post('upload_image', 'upload_image');
+    Route::post('upload_image', 'upload_image');
 });
+
+Route::get('/get_ratings/{user_id}', [RatingController::class, 'get_ratings']);
+Route::post('/add_rating', [RatingController::class, 'add_rating']);
+Route::delete('/delete_rating/{rating_id}', [RatingController::class, 'delete_rating']);
+Route::patch('/update_rating/{rating_id}', [RatingController::class, 'update_rating']);
+
+Route::get('/messages/{id}', [TempChatController::class, 'fetchMessages']);
+Route::post('/messages/{id}', [TempChatController::class, 'sendMessage']);
+
+Route::post('/support', [SupportMessageController::class, 'fetchMessages']);
+Route::post('/fetch_chats', [SupportMessageController::class, 'getChats']);
+Route::post('/send_support_message', [SupportMessageController::class, 'sendMessage']);
+Route::post('/create_chat', [SupportMessageController::class, 'createChat']);
+
+Route::post('/update_request_location', [RequestController::class, 'updateLocation']);
+Route::post('/create_request', [RequestController::class, 'createRequest']);
+Route::post('/update_request_status', [RequestController::class, 'updateStatus']);
+Route::post('/update_request_driver', [RequestController::class, 'updateDriver']);
+
 
 // Route::post('/register', [UserController::class, 'store']);
 Route::get('/users', [UserController::class, 'index']);
@@ -36,6 +57,10 @@ Route::post('/destroy', [UserController::class, 'destroy']);
 Route::post('/update_location', [UserController::class, 'updateLocation']);
 
 Route::post('/update_status', [DriverController::class, 'update']);
+Route::post('/getpendingdrivers', [DriverController::class, 'getPendingDrivers']);
+
+Route::post('/getstats', [StatsController::class, 'getStats']);
+
 
 
 Route::post('/update_request_location', [RequestController::class, 'updateLocation']);
@@ -45,9 +70,10 @@ Route::post('/update_request_driver', [RequestController::class, 'updateDriver']
 Route::get('/messages/{id}', [TempChatController::class, 'fetchMessages']);
 Route::post('/messages/{id}', [TempChatController::class, 'sendMessage']);
 
-Route::get('/support/{id}', [SupportMessageController::class, 'fetchMessages']);
-Route::post('/support', [SupportMessageController::class, 'sendMessage']);
-
+Route::post('/support', [SupportMessageController::class, 'fetchMessages']);
+Route::post('/fetch_chats', [SupportMessageController::class, 'getChats']);
+Route::post('/send_support_message', [SupportMessageController::class, 'sendMessage']);
+Route::post('/create_chat', [SupportMessageController::class, 'createChat']);
 
 Route::get('/get_ratings/{user_id}', [RatingController::class, 'get_ratings']);
 Route::post('/add_rating', [RatingController::class, 'add_rating']);
