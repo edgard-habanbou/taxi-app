@@ -53,6 +53,9 @@ Route::get('/user-requests/status-1', [RequestController::class, 'getRequestsSta
 // Route for checking passenger requests
 Route::get('/user-requests/checkDriverStatus', [RequestController::class, 'checkDriverStatus']);
 Route::get('/user-request/active', [RequestController::class, 'getUserActiveRequests']);
+Route::get('/all-requests', [RequestController::class, 'getAllRequests']);
+Route::get('/User-Active-Requests', [RequestController::class, 'getUserActiveRequests']);
+Route::post('/driver-location', [RequestController::class, 'getDriverLocation']);
 
 
 

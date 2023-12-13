@@ -11,9 +11,9 @@ class RequestController extends Controller
     public function createRequest(Request $request)
     {
         $user = Auth::user();
-        $requests = UserRequest::whereIn('status', [1,2])->exists();
-        if ($request){
-            return response()->json(['message' => 'another request is open'], 403);
+        $requests = UserRequest::where('passenger_id',$user->id)->whereIn('status', [1,2])->get();
+        if ($requests!='[]'){
+            return response()->json(['message' => "another request found"], 403);
         }
         else{
         if ($user->role_id === 2) {
@@ -24,7 +24,7 @@ class RequestController extends Controller
             $userRequest->destination=$request->destination;
                 $userRequest->save();
 
-            return response()->json(['message' => 'Request created successfully']);
+            return response()->json(['id' => $userRequest->id]);
         } else {
             return response()->json(['message' => 'Unauthorized'], 403);
         }}
@@ -83,7 +83,7 @@ class RequestController extends Controller
     }
 
     // Function to check if a passenger has any requests with status 2
-    public function checkDriverStatus($driver_id)    {
+    public function checkDriverStatus(Request $driver_id)    {
         $hasStatusTwo = UserRequest::where('driver_id', $driver_id)
             ->where('status', 2)
             ->exists();
@@ -91,11 +91,41 @@ class RequestController extends Controller
         return response()->json(['hasStatusTwo' => !$hasStatusTwo]);
     }
 
-    public function getUserActiveRequests($driver_id)    {
+    public function getDriverLocation(Request $request)    {
+        $request = UserRequest::findOrFail($request->id);
+
+        $driverInfo= User::where('id',$request->driver_id)->get()  ;  
+
+        if($driverInfo->isEmpty()){
+        return response()->json(['driver' => null]);
+
+        }
+        else
+        {return response()->json(['driver' => $driverInfo]);}
+
+        
+    }
+
+    public function getUserActiveRequests()    {
         $user =Auth::user(); // Fetch the user by their ID
-        $request= UserRequest::where('passenger_id',$user->id);
+        $request= UserRequest::where('passenger_id',$user->id)->whereIn('status', [1,2])->get();
     // $requests now holds all the requests for the user as an array
         return response()->json($request);
+    }
+
+    public function getAllRequests()    {
+        $user =Auth::user(); // Fetch the user by their ID
+        $request= UserRequest::whereIn('status', [1])->get();
+
+        $Active= UserRequest::where('driver_id',$user->id)->where('status', [2])->get();
+
+        if($Active->isEmpty()){
+            return response()->json($request);
+        }
+    // $requests now holds all the requests for the user as an array
+        else{
+            return response()->json($Active);
+        }
     }
 
     

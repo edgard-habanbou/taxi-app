@@ -7,9 +7,11 @@ import { authActions } from "../../store/auth";
 import { useNavigate } from "react-router-dom";
 const Passenger = () => {
   const dispatch = useDispatch();
+  const user = useSelector((state) => state.auth.isAuthenticated);
+  const role_id = useSelector((state) => state.auth.role_id);
   const navigate = useNavigate();
   const token = localStorage.getItem("jwt");
-  const localUser = localStorage.getItem("jwt");
+  const localUser = localStorage.getItem("user");
 
   const verify = async () => {
     try {
@@ -19,19 +21,12 @@ const Passenger = () => {
           "Content-Type": "application/json",
         },
       });
-      const user = response.data;
-      console.log(user);
-      dispatch(
-        authActions.setUser({
-          role_id: localUser.role_id,
-          latitude: localUser.latitude,
-          longitude: localUser.longitude,
-        })
-      );
-      // Do something with the user object
+
+      dispatch(authActions.setRole(2));
     } catch (error) {
       console.error(error);
       dispatch(authActions.setUser(null));
+      dispatch(authActions.setRole(null));
       dispatch(authActions.logout());
       navigate("/");
     }
@@ -41,9 +36,15 @@ const Passenger = () => {
     verify();
   }, []);
 
-  const user = useSelector((state) => state.auth.user);
-
-  return <>{user ? <MapController></MapController> : <p>forbidden</p>}</>;
+  return (
+    <>
+      {user && role_id == 2 ? (
+        <MapController userType={2}></MapController>
+      ) : (
+        <p>forbidden</p>
+      )}
+    </>
+  );
 };
 
 export default Passenger;

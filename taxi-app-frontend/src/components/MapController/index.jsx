@@ -1,22 +1,56 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Map from "../Map";
 import { Marker } from "@react-google-maps/api";
+import { useSelector } from "react-redux";
+import axios from "axios";
+const id = localStorage.getItem("requestId");
 
-function MapController() {
-  const markers = [
-    <Marker
-      key="1"
-      position={{ lat: 33.8938, lng: 35.5018 }}
-      label={"batata"}
-    ></Marker>,
-    <Marker
-      key="2"
-      position={{ lat: 33.8939, lng: 35.5018 }}
-      label={"tata"}
-    ></Marker>,
-  ];
+function MapController({ userType }) {
+  const token = localStorage.getItem("jwt");
+  const [marker, setmarker] = useState(null);
 
-  return <>{/* <Map markers={markers}></Map> */}</>;
+  const getDriverLocation = async () => {
+    try {
+      const response = await axios.post(
+        "http://localhost:8000/api/driver-location",
+        { id },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+            "Content-Type": "application/json",
+          },
+        }
+      );
+      console.log(id);
+      console.log(response.data.driver);
+      if (response.data.driver) {
+        setmarker(
+          <Marker
+            id={Math.random()}
+            position={{
+              lat: parseFloat(response.data.driver[0].latitude),
+              lng: parseFloat(response.data.driver[0].longitude),
+            }}
+            label={"driver"}
+          ></Marker>
+        );
+      }
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  return (
+    <>
+      {
+        <Map
+          markers={marker}
+          usertype={userType}
+          driverLocation={getDriverLocation}
+        ></Map>
+      }
+    </>
+  );
 }
 
 export default MapController;
