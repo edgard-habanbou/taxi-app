@@ -4,7 +4,8 @@ import axios from 'axios'
 import './index.css'
 import { useState } from 'react'
 
-function Row({ user: { id, fname, lname }, stats, index }) {
+function Row({ user, stats, index }) {
+  console.log(user)
   const [Loading, setLoading] = useState(false)
 
   const handleStatusUpdate = (acceptedValue) => {
@@ -14,7 +15,7 @@ function Row({ user: { id, fname, lname }, stats, index }) {
       .post(
         'http://localhost:8000/api/update_status',
         {
-          id: id,
+          id: user.id,
           accepted: acceptedValue,
           busy: 0
         },
@@ -57,10 +58,16 @@ function Row({ user: { id, fname, lname }, stats, index }) {
           <p>{index + 1}</p>
         </div>
         <div>
-          <p>{fname + ' ' + lname}</p>
+          <p>{user.fname + ' ' + user.lname}</p>
         </div>
       </div>
-      {!stats && (
+      {stats ? (
+        <div className="flex right">
+          <Button className={`btn ${user.average_rating < 2.5 ? 'red' : 'green'}`} disabled>
+            {user.average_rating}
+          </Button>
+        </div>
+      ) : (
         <div className="flex gap right">
           <div>
             <Button className={'btn green'} onClick={handleAccept}>
@@ -82,7 +89,8 @@ Row.propTypes = {
   user: PropTypes.shape({
     id: PropTypes.string,
     fname: PropTypes.string,
-    lname: PropTypes.string
+    lname: PropTypes.string,
+    average_rating: PropTypes.number
   }),
   stats: PropTypes.bool,
   index: PropTypes.number
