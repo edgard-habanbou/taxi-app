@@ -67,7 +67,9 @@ Route::get('/users', [UserController::class, 'index']);
 Route::put('/update_user', [UserController::class, 'update']);
 Route::post('/destroy', [UserController::class, 'destroy']);
 Route::post('/update_location', [UserController::class, 'updateLocation']);
+Route::post('/update_picture',[UserController::class,'updatePicture']);
 Route::get('/show',[UserController::class,'show']);
+Route::post('/update_profile',[UserController::class,'updateProfile']);
 
 Route::post('/update_status', [DriverController::class, 'update']);
 Route::get('/verify', [UserController::class, 'verify']);

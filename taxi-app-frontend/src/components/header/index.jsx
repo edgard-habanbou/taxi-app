@@ -1,5 +1,4 @@
 import { useSelector, useDispatch } from "react-redux";
-
 import "./index.css";
 import { authActions } from "../../store/auth";
 import Button from "../button";
@@ -7,7 +6,6 @@ import taxiImage from "../../assets/images/taxi.png";
 
 const Header = () => {
   const dispatch = useDispatch();
-
   const isAuth = useSelector((state) => state.auth.isAuthenticated);
 
   const logoutHandler = () => {
