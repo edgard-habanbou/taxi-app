@@ -1,0 +1,50 @@
+/* input {
+    width : 90%;
+    height: 40px;
+    margin: 20px 0;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    outline: none;
+    background-color: #eae7e7;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    transition: box-shadow 0.3s ease;
+    font-size: 16px;
+}
+
+button {
+    margin-left: 20px;
+    height: 40px;
+    background: #000;
+}
+input-group {
+    text-align: center;
+}
+
+input:focus {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+  
+input::placeholder {
+    color: #a0a0a0;
+}
+  
+
+input:focus {
+    animation: input-focus-animation 0.3s ease;
+}
+.input-group {
+    text-align: center;
+}
+  
+@keyframes input-focus-animation {
+    0% {
+      transform: scale(1);
+    }
+    50% {
+      transform: scale(1.05);
+    }
+    100% {
+      transform: scale(1);
+    }
+} */

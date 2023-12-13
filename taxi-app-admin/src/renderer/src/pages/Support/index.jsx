@@ -19,7 +19,6 @@ function Support() {
         }
       )
       .then((response) => {
-        console.log(response.data)
         setChats(response.data)
       })
       .catch((error) => {

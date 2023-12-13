@@ -22,7 +22,7 @@ return new class extends Migration
             $table->unsignedBigInteger('role_id');
             $table->string('latitude')->nullable();
             $table->string('longitude')->nullable();
-            $table->string('image_url')->nullable();
+            $table->text('image_url')->nullable();
             $table->rememberToken();
             $table->timestamps();
         });

@@ -1,18 +1,21 @@
-// components/ChatForm.jsx
-import React, { useState } from "react";
+import { useState } from 'react'
+import PropTypes from 'prop-types'
 
-const ChatForm = ({ user, onMessageSent }) => {
-  const [newMessage, setNewMessage] = useState("");
-  user = JSON.parse(user);
+import './index.css'
+
+const ChatForm = ({ user, onMessageSent, admin_chat_id }) => {
+  const [newMessage, setNewMessage] = useState('')
+  user = JSON.parse(user)
   const sendMessage = () => {
     onMessageSent({
       user: user,
       fname: user.fname,
       lname: user.lname,
       message: newMessage,
-    });
-    setNewMessage("");
-  };
+      admin_chat_id: admin_chat_id
+    })
+    setNewMessage('')
+  }
 
   return (
     <div className="input-group">
@@ -24,19 +27,19 @@ const ChatForm = ({ user, onMessageSent }) => {
         placeholder="Type your message here..."
         value={newMessage}
         onChange={(e) => setNewMessage(e.target.value)}
-        onKeyUp={(e) => e.key === "Enter" && sendMessage()}
+        onKeyUp={(e) => e.key === 'Enter' && sendMessage()}
       />
       <span className="input-group-btn">
-        <button
-          className="btn btn-primary btn-sm"
-          id="btn-chat"
-          onClick={sendMessage}
-        >
+        <button className="btn btn-primary btn-sm" id="btn-chat" onClick={sendMessage}>
           Send
         </button>
       </span>
     </div>
-  );
-};
+  )
+}
 
-export default ChatForm;
+ChatForm.propTypes = {
+  user: PropTypes.string,
+  onMessageSent: PropTypes.func
+}
+export default ChatForm

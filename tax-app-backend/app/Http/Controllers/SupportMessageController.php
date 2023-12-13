@@ -16,10 +16,10 @@ class SupportMessageController extends Controller
 
     public function fetchMessages(Request $request)
     {
+
         return DB::table('support_messages')
             ->select('support_messages.*', 'users.fname', 'users.lname', 'users.image_url', 'users.id')
             ->join('users', 'support_messages.user_id', '=', 'users.id')
-            ->where('support_messages.user_id', '=', $request->input('user_id'))
             ->where('support_messages.admin_chat_id', '=', $request->input('admin_chat_id'))
             ->orderBy('support_messages.created_at', 'asc')
             ->get();
@@ -28,11 +28,10 @@ class SupportMessageController extends Controller
     public function sendMessage(Request $request)
     {
         $user = Auth::user();
-
         $user->supportMessage()->create([
             'message' => $request->input('message'),
             'user_id' => $user->id,
-            'chat_id' => $request->input('admin_chat_id')
+            'admin_chat_id' => $request->input('admin_chat_id')
 
 
         ]);
