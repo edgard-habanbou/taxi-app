@@ -131,8 +131,8 @@ class AuthController extends Controller
     
     public function upload_image(Request $req){
         $user=Auth::user();
-        if ($request->hasFile('image_url')) {
-            $uploadedImage = $request->file('image_url');
+        if ($req->hasFile('image_url')) {
+            $uploadedImage = $req->file('image_url');
             $path = $uploadedImage->store('public/images'); 
             $imageUrl = $this->generateBase64Image($path);
         } else {

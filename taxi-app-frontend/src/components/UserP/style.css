@@ -1,0 +1,58 @@
+.user-profile-container {
+    display: flex;
+}
+  
+.left-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 30%;
+}
+  
+.image {
+    width: 50%;
+    border-radius: 50%;
+    margin-bottom: 10px;
+}
+  
+.change-profile-button {
+    width: 40%;
+    padding: 14px;
+    background-color: #181e24;
+    color: #fff;
+    border: none;
+    border-radius: 30px;
+    cursor: pointer;
+}
+  
+.right-container {
+    width: 70%;
+    padding: 10px;
+}
+  
+.input-container {
+    margin-bottom: 15px;
+    display: flex;
+    flex-direction: column;
+}
+  
+label {
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+  
+input {
+    width: 250px;
+    padding: 12px 20px;
+    margin: 8px 0;
+    border: 1px solid rgb(122, 118, 118);
+    border-radius: 5px;
+    box-sizing: border-box;
+}
+
+.design{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;   
+    gap: 10%; 
+}

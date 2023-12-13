@@ -15,10 +15,10 @@ class UserController extends Controller
         return response()->json($users);
     }
     // get user by id
-    public function show($id)
+    public function show()
     {
-        $user = User::findOrFail($id);
-        return response()->json($user);
+        $user = auth()->user();
+        return response()->json(['userinfo' => $user]);
     }
 
     public function store(Request $request)

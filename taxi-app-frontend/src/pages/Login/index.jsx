@@ -31,7 +31,7 @@ const Login = () => {
       .then((res) => {
         localStorage.setItem("jwt", res.data.authorisation.token);
         localStorage.setItem("user", JSON.stringify(res.data.user));
-        window.location.href = "/chat";
+        window.location.href = "/userprofile";
       })
       .catch((err) => {
         alert("Invalid username or password");
