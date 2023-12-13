@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Driver;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -48,16 +49,13 @@ class AuthController extends Controller
             'fname' => 'required|string|max:255',
             'lname' => 'required|string|max:255',
             'gender' => 'required|integer',
-            'role_id' => 'required|integer',
+            'role_id' => 'required|integer|in:2,3',
             'email' => 'required|string|email|max:255|unique:users',
             'password' => 'required|string|min:6',
-            'image_url' => 'image|mimes:jpeg,png,jpg,gif|max:2048',
+            // 'image_url' => 'image|mimes:jpeg,png,jpg,gif|max:2048',
         ]);
-<<<<<<< HEAD
-=======
 
 
->>>>>>> e22afa0 (image is encoded inito base64)
         $user = User::create([
             'email' => $request->email,
             'password' => Hash::make($request->password),
@@ -65,13 +63,15 @@ class AuthController extends Controller
             'lname' => $request->lname,
             'gender' => $request->gender,
             'role_id' => $request->role_id,
-<<<<<<< HEAD
-=======
             'latitude' => $request->latitude,
             'longitude' => $request->longitude,
-            'image_url' => $imageUrl,
->>>>>>> e22afa0 (image is encoded inito base64)
+            // 'image_url' => $imageUrl,
         ]);
+        if ($request->role_id == 3) {
+            Driver::create([
+                'user_id' => $user->id,
+            ]);
+        }
 
         $token = Auth::login($user);
         return response()->json([
