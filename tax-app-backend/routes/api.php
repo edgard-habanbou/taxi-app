@@ -43,6 +43,7 @@ Route::get('/messages/{id}', [TempChatController::class, 'fetchMessages']);
 Route::post('/messages/{id}', [TempChatController::class, 'sendMessage']);
 
 Route::post('/support', [SupportMessageController::class, 'fetchMessages']);
+Route::post('/fetch_chats', [SupportMessageController::class, 'getChats']);
 Route::post('/send_support_message', [SupportMessageController::class, 'sendMessage']);
 Route::post('/create_chat', [SupportMessageController::class, 'createChat']);
 

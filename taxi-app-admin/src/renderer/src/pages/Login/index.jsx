@@ -61,6 +61,9 @@ const Login = () => {
   }
   return (
     <div className="auth">
+      <div className="flex center">
+        <h2>Login</h2>
+      </div>
       <div className="form flex column gap">
         <TextInput
           placeholder="email"

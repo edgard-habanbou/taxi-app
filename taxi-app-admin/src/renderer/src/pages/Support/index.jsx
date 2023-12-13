@@ -1,55 +1,61 @@
 import Header from '../../components/Header'
 import { useState, useEffect } from 'react'
 import axios from 'axios'
-import Chat from '../../components/Chat'
+import SupportChats from '../../components/SupportChats'
 function Support() {
-  const [messages, setMessages] = useState([])
+  const [chats, setChats] = useState([])
+  const [Loading, setLoading] = useState([])
 
-  const request_id = 1
-  const fetchMessages = () => {
+  const fetchChats = () => {
+    setLoading(true)
     axios
-      .get(`http://localhost:8000/api/messages/${request_id}`, {
-        headers: {
-          Authorization: `Bearer ${localStorage.getItem('jwt')}`
+      .post(
+        `http://localhost:8000/api/fetch_chats`,
+        {},
+        {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem('jwt')}`
+          }
         }
-      })
+      )
       .then((response) => {
-        setMessages(response.data)
+        console.log(response.data)
+        setChats(response.data)
       })
       .catch((error) => {
         console.error('Error fetching messages:', error)
       })
-  }
-
-  const addMessage = (message) => {
-    setMessages((prevMessages) => [...prevMessages, message])
-
-    axios
-      .post(`http://localhost:8000/api/messages/${request_id}`, message, {
-        headers: {
-          Authorization: `Bearer ${localStorage.getItem('jwt')}`
-        }
-      })
-      .then((response) => {
-        console.log(response.data)
-      })
-      .catch((error) => {
-        console.error('Error sending message:', error)
+      .finally(() => {
+        setLoading(false)
       })
   }
+
   useEffect(() => {
-    fetchMessages()
-    setInterval(() => {
-      fetchMessages()
-    }, 2000)
+    fetchChats()
+    console.log(chats)
   }, [])
   return (
     <div>
-      <div>
-        <Header />
-      </div>
-      <div>
-        <Chat messages={messages} addMessage={addMessage} user={localStorage.getItem('user')} />
+      {Loading ? (
+        <div className="loading-container">
+          <div className="loader"></div>
+        </div>
+      ) : (
+        ''
+      )}
+      <Header />
+
+      <div className="flex full-page center">
+        <div className="wrapper flex gap column">
+          <div>
+            <h2>Support Requests</h2>
+          </div>
+          <div className="content flex column full-width gap">
+            {chats?.map((chat, index) => (
+              <SupportChats chat={chat} key={index} index={index} />
+            ))}
+          </div>
+        </div>
       </div>
     </div>
   )

@@ -45,7 +45,10 @@ function UserManagment() {
       )}
       <Header />
       <div className="flex full-page center">
-        <div className="wrapper">
+        <div className="wrapper flex gap column">
+          <div>
+            <h2>New Drivers</h2>
+          </div>
           <div className="content flex column full-width gap">
             {PendingDrivers?.map((user, index) => {
               return <Row key={index} index={index} user={user}></Row>

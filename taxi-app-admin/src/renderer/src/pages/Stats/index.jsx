@@ -43,7 +43,7 @@ function Stats() {
       )}
       <Header />
       <div className="flex full-page center">
-        <div className="flex column center gap seventy">
+        <div className="flex wrapper column center gap seventy">
           <div className="flex row gap wrap">
             <div>
               <p>
@@ -61,7 +61,10 @@ function Stats() {
               </p>
             </div>
           </div>
-          <div className="wrapper full-width">
+          <div className=" full-width full-height flex gap column">
+            <div>
+              <h2>Drivers Average Rating</h2>
+            </div>
             <div className="content flex column full-width gap">
               {driverRating?.map((user, index) => {
                 return <Row key={index} index={index} stats={true} user={user}></Row>

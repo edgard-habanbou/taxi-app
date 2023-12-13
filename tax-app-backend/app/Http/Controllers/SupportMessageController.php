@@ -53,10 +53,10 @@ class SupportMessageController extends Controller
     {
         $user = Auth::user();
         if ($user->role_id == 1) {
-            return DB::table('admin_chat')
-                ->select('admin_chat.*', 'users.fname', 'users.lname', 'users.image_url', 'users.id')
-                ->join('users', 'admin_chat.user_id', '=', 'users.id')
-                ->where('admin_chat.is_concluded', 0)
+            return DB::table('admin_chats')
+                ->select('admin_chats.*', 'users.fname', 'users.lname', 'users.image_url', 'users.id')
+                ->join('users', 'admin_chats.user_id', '=', 'users.id')
+                ->where('admin_chats.is_concluded', 0)
                 ->orderBy('created_at', 'asc')
                 ->get();
         }
