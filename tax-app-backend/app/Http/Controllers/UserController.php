@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use App\Models\User;
@@ -21,17 +22,17 @@ class UserController extends Controller
         return response()->json(['userinfo' => $user]);
     }
 
-        // get user by id
+    // get user by id
     public function verify()
-        {
-            $user = Auth::user();
-                    // Check if user is authenticated and exists in the database
-            if ($user && User::where('id', $user->id)->exists()) {
-                return response()->json($user);
-            }
-        
-            return response()->json(['message' => 'User not found'], 404);
+    {
+        $user = Auth::user();
+        // Check if user is authenticated and exists in the database
+        if ($user && User::where('id', $user->id)->exists()) {
+            return response()->json($user);
         }
+
+        return response()->json(['message' => 'User not found'], 404);
+    }
 
     public function store(Request $request)
     {
@@ -83,30 +84,31 @@ class UserController extends Controller
             'latitude' => 'required|string',
             'longitude' => 'required|string',
         ]);
-    
+
         $user = User::findOrFail($user->id);
-    
+
         $user->update([
             'latitude' => $validatedData['latitude'],
             'longitude' => $validatedData['longitude'],
         ]);
-    
+
         return response()->json($user);
     }
 
-    public function updateProfile(Request $request){
-        $user=Auth::user();
-        $validatedData=$request->validate([
-            'fname'=>'nullable|string',
-            'lname'=>'nullable|string',
-            'email'=>'nullable|email|unique:users,email',
-            'password'=>'nullable|string|min:6',
+    public function updateProfile(Request $request)
+    {
+        $user = Auth::user();
+        $validatedData = $request->validate([
+            'fname' => 'nullable|string',
+            'lname' => 'nullable|string',
+            'email' => 'nullable|email|unique:users,email',
+            'password' => 'nullable|string|min:6',
         ]);
         $user = User::findorFail($user->id);
         $updateData = array_filter($validatedData);
 
         $user->update($updateData);
-    
+
         return response()->json($user);
     }
 
@@ -118,9 +120,15 @@ class UserController extends Controller
         ]);
 
         if ($request->hasFile('image_url')) {
-            $uploadedImage = $request->file('image_url');
-            $path = $uploadedImage->store('public/images');
-            $imageUrl = $this->generateBase64Image($path);
+            // $uploadedImage = $request->file('image_url');
+            // $path = $uploadedImage->store('public/images');
+            // $imageUrl = $this->generateBase64Image($path);
+            $path = public_path('images/');
+            !is_dir($path) &&
+                mkdir($path, 0777, true);
+
+            $imageName = time() . '.' . $request->file('image_url')->extension();
+            $request->file('image_url')->move($path, $imageName);
         } else {
             $imageUrl = null;
         }
@@ -128,24 +136,25 @@ class UserController extends Controller
         $user = User::findOrFail($user->id);
 
         $user->update([
-            'image_url' => $imageUrl,
+            // 'image_url' => $imageUrl,
+            'image_url' => "/images/" . $imageName,
         ]);
 
         return response()->json($user);
     }
-    
+
     private function generateBase64Image($path)
     {
-        $absolutePath = storage_path('app/' . $path);
-    
+        $absolutePath = storage_path('public/' . $path);
+
         if (file_exists($absolutePath)) {
             $data = file_get_contents($absolutePath);
-    
+
             if ($data !== false) {
                 $type = pathinfo($absolutePath, PATHINFO_EXTENSION);
-    
+
                 $base64 = 'data:image/' . $type . ';base64,' . base64_encode($data);
-    
+
                 return $base64;
             } else {
                 echo "Failed to read file contents.\n";
@@ -153,7 +162,7 @@ class UserController extends Controller
         } else {
             echo "File does not exist: $absolutePath";
         }
-    
+
         return null;
     }
 
