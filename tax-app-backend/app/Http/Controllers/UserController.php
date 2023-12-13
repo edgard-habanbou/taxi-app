@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
@@ -20,6 +20,18 @@ class UserController extends Controller
         $user = auth()->user();
         return response()->json(['userinfo' => $user]);
     }
+
+        // get user by id
+    public function verify()
+        {
+            $user = Auth::user();
+                    // Check if user is authenticated and exists in the database
+            if ($user && User::where('id', $user->id)->exists()) {
+                return response()->json($user);
+            }
+        
+            return response()->json(['message' => 'User not found'], 404);
+        }
 
     public function store(Request $request)
     {
@@ -66,12 +78,13 @@ class UserController extends Controller
 
     public function updateLocation(Request $request)
     {
+        $user = Auth::user();
         $validatedData = $request->validate([
             'latitude' => 'required|string',
             'longitude' => 'required|string',
         ]);
     
-        $user = User::findOrFail($request->id);
+        $user = User::findOrFail($user->id);
     
         $user->update([
             'latitude' => $validatedData['latitude'],

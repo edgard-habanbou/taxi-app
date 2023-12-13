@@ -13,8 +13,8 @@ return new class extends Migration
     {
         Schema::create('requests', function (Blueprint $table) {
             $table->id();
-            $table->string('latitude');
-            $table->string('longitude');
+            $table->string('origin');
+            $table->string('destination');
             $table->integer('status')->default(0);
             $table->unsignedBigInteger('driver_id')->nullable();
             $table->unsignedBigInteger('passenger_id');
