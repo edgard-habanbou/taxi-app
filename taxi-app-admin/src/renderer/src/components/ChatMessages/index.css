@@ -14,17 +14,17 @@ ul.chat {
   text-align: right;
 }
 
-/* li {
+.li {
   font-size: large;
   font-style: sans-serif;
   width: 50%;
   margin-bottom: 5px;
 }
 
-li .clearfix {
+.li .clearfix {
   padding: 0 10px;
   padding: 10px;
-} */
+}
 
 .user-image {
   border-radius: 50%;
@@ -34,32 +34,6 @@ li .clearfix {
 .user p {
   font-size: small;
 }
-
-/* .message-img{
-    display: flex;
-    flex-direction: row;
-  }
-
-  .message-info {
-    display: flex;
-    flex-direction: column;
-  }
-
-  .left .clearfix .message-info .pp img{
-    
-  }
-
-  .left .clearfix .message-info .user p{
-   
-}
-
-.right .clearfix .message-info .pp img{
-
-}
-
-.right .clearfix .message-info .user{
-
-} */
 
 .message-info {
   display: flex;

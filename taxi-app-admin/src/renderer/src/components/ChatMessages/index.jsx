@@ -10,7 +10,7 @@ const ChatMessages = ({ messages }) => {
         let user_id = message.user_id
         const isCurrentUser = user_id === user.id ? 'right' : 'left'
         return (
-          <li className={isCurrentUser} key={index}>
+          <li className={`li ${isCurrentUser}`} key={index}>
             <div className="clearfix">
               <div className="message-info">
                 <div className="pp">

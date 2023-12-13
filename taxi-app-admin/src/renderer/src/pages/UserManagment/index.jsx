@@ -25,7 +25,7 @@ function UserManagment() {
         setPendingDrivers(res.data)
       })
       .catch(() => {
-        alert('Something went wrong!')
+        console.log('error')
       })
       .finally(() => {
         setLoading(false)

@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import axios from 'axios'
+import Modal from '../../components/Modal'
 
 import './index.css'
 import TextInput from '../../components/InputText'
@@ -10,6 +11,8 @@ const Login = () => {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [loading, setLoading] = useState(false)
+  const [showModal, setShowModal] = useState(false)
+  const [modalText, setModalText] = useState('')
   const navigate = useNavigate()
 
   const handleEmailChange = (event) => {
@@ -26,7 +29,8 @@ const Login = () => {
   }
   const loginHandler = () => {
     if (email == '' || password == '') {
-      alert('Please enter email and password')
+      setModalText('Please enter email and password')
+      setShowModal(true)
     } else {
       setLoading(true)
       axios
@@ -48,11 +52,13 @@ const Login = () => {
             localStorage.setItem('user', JSON.stringify(res.data.user))
             navigate('/user-management')
           } else {
-            alert('You are not an admin')
+            setModalText('You are not authorized to access this page')
+            setShowModal(true)
           }
         })
         .catch(() => {
-          alert('Invalid username or password')
+          setModalText('Invalid username or password')
+          setShowModal(true)
         })
         .finally(() => {
           setLoading(false)
@@ -61,6 +67,7 @@ const Login = () => {
   }
   return (
     <div className="auth">
+      {showModal && <Modal text={modalText} exitModal={() => setShowModal(false)} />}
       <div className="flex center">
         <h2>Login</h2>
       </div>

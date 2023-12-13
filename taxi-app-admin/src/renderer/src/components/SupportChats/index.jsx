@@ -2,6 +2,7 @@ import { useState } from 'react'
 import Button from '../button'
 import PropTypes from 'prop-types'
 import ChatM from '../../pages/ChatM'
+import './index.css'
 
 function SupportChats({ chat, index }) {
   const [showChat, setShowChat] = useState(false)
@@ -11,7 +12,11 @@ function SupportChats({ chat, index }) {
   return (
     <div>
       {showChat ? (
-        <ChatM goToMain={goToChat} admin_chat_id={chat.id} />
+        <div className="modal-overlay">
+          <div className="modal-content">
+            <ChatM goToMain={goToChat} admin_chat_id={chat.id} />
+          </div>
+        </div>
       ) : (
         <div className="flex space-between center full-width driver">
           <div className="username flex gap">

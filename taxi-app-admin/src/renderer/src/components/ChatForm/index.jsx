@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import PropTypes from 'prop-types'
+import Button from '../Button'
 
 import './index.css'
 
@@ -23,16 +24,16 @@ const ChatForm = ({ user, onMessageSent, admin_chat_id }) => {
         id="btn-input"
         type="text"
         name="message"
-        className="form-control input-sm"
+        className="input"
         placeholder="Type your message here..."
         value={newMessage}
         onChange={(e) => setNewMessage(e.target.value)}
         onKeyUp={(e) => e.key === 'Enter' && sendMessage()}
       />
-      <span className="input-group-btn">
-        <button className="btn btn-primary btn-sm" id="btn-chat" onClick={sendMessage}>
+      <span className="flex center">
+        <Button className="btn green" onClick={sendMessage}>
           Send
-        </button>
+        </Button>
       </span>
     </div>
   )

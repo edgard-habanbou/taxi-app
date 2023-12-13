@@ -3,9 +3,12 @@ import Button from '../Button'
 import axios from 'axios'
 import './index.css'
 import { useState } from 'react'
+import Modal from '../Modal'
 
 function Row({ user, stats, index }) {
   const [Loading, setLoading] = useState(false)
+  const [showModal, setShowModal] = useState(false)
+  const [modalText, setModalText] = useState('')
 
   const handleStatusUpdate = (acceptedValue) => {
     setLoading(true)
@@ -26,11 +29,11 @@ function Row({ user, stats, index }) {
         }
       )
       .then((res) => {
-        alert(res.data.message)
         window.location.reload()
       })
       .catch(() => {
-        alert('Something went wrong!')
+        setModalText('Something went wrong!')
+        setShowModal(true)
       })
       .finally(() => {
         setLoading(false)
@@ -46,40 +49,50 @@ function Row({ user, stats, index }) {
   }
 
   return (
-    <div className="flex space-between center full-width driver">
-      {Loading && (
-        <div className="loading-container">
-          <div className="loader"></div>
-        </div>
+    <div>
+      {showModal && (
+        <Modal
+          text={modalText}
+          onClose={() => {
+            setShowModal(false)
+          }}
+        />
       )}
-      <div className="username flex gap">
-        <div>
-          <p>{index + 1}</p>
+      <div className="flex space-between center full-width driver">
+        {Loading && (
+          <div className="loading-container">
+            <div className="loader"></div>
+          </div>
+        )}
+        <div className="username flex gap">
+          <div>
+            <p>{index + 1}</p>
+          </div>
+          <div>
+            <p>{user.fname + ' ' + user.lname}</p>
+          </div>
         </div>
-        <div>
-          <p>{user.fname + ' ' + user.lname}</p>
-        </div>
+        {stats ? (
+          <div className="flex right">
+            <Button className={`btn ${user.average_rating < 2.5 ? 'red' : 'green'}`} disabled>
+              {user.average_rating}
+            </Button>
+          </div>
+        ) : (
+          <div className="flex gap right">
+            <div>
+              <Button className={'btn green'} onClick={handleAccept}>
+                Accept
+              </Button>
+            </div>
+            <div>
+              <Button className={'btn red'} onClick={handleReject}>
+                Reject
+              </Button>
+            </div>
+          </div>
+        )}
       </div>
-      {stats ? (
-        <div className="flex right">
-          <Button className={`btn ${user.average_rating < 2.5 ? 'red' : 'green'}`} disabled>
-            {user.average_rating}
-          </Button>
-        </div>
-      ) : (
-        <div className="flex gap right">
-          <div>
-            <Button className={'btn green'} onClick={handleAccept}>
-              Accept
-            </Button>
-          </div>
-          <div>
-            <Button className={'btn red'} onClick={handleReject}>
-              Reject
-            </Button>
-          </div>
-        </div>
-      )}
     </div>
   )
 }

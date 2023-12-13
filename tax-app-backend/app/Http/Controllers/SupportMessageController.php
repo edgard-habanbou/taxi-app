@@ -27,6 +27,10 @@ class SupportMessageController extends Controller
 
     public function sendMessage(Request $request)
     {
+        $request->validate([
+            'message' => 'required|string',
+            'admin_chat_id' => 'required|integer',
+        ]);
         $user = Auth::user();
         $user->supportMessage()->create([
             'message' => $request->input('message'),

@@ -36,9 +36,6 @@ const ChatM = ({ admin_chat_id, goToMain }) => {
           Authorization: `Bearer ${localStorage.getItem('jwt')}`
         }
       })
-      .then((response) => {
-        console.log(response.data)
-      })
       .catch((error) => {
         console.error('Error sending message:', error)
       })
@@ -51,9 +48,9 @@ const ChatM = ({ admin_chat_id, goToMain }) => {
   }, [])
   return (
     <div>
-      <div>
+      <div className="flex right">
         <Button className="btn" onClick={goToMain}>
-          Back
+          X
         </Button>
       </div>
       <Chat

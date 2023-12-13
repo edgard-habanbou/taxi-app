@@ -1,79 +1,28 @@
-/* .container {
-    display: flex;
-    flex-direction: column;
-} */
+.container {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
 
-/* .card { 
-    display: flex;
-    flex-direction: column;
-    background: white;
-    width:100vw;
-    height: calc(100vh - 5rem);
+.card {
+  display: flex;
+  flex-direction: column;
+  background-color: white;
+  position: relative;
+}
+
+.card-body {
+  overflow-y: auto;
+  overflow-x: hidden;
+  margin: 0 20px;
 }
 
 .card-footer {
-    margin-top: auto;
-  }
+  background-color: white;
+  bottom: 0;
+  width: 100%;
+}
 
-  .card-body {
-    margin: 20px;
-  } */
-
-
-
-
-
-
-  /* container {
-    height: 100vh;
-    padding-bottom: 5rem;
-  }
-  
-  .card {
-    height: 100%;
-    background-color: white;
-  }
-  
-  .card-body {
-    overflow-y: auto;
-    max-height: calc(100vh - 5rem);
-  }
-  
-  .card-footer {
-    position: fixed;
-    bottom: 0;
-    width: 100%;
-  } */
-
-
-.container {
-    height: 100vh;
-    display: flex;
-    flex-direction: column;
-    max-height: calc(100vh - 5rem);
-    overflow: hidden;
-  }
-  
-  .card {
-    display: flex;
-    flex-direction: column;
-    background-color: white;
-    position: relative;
-  }
-  
-  .card-body {
-    overflow-y: auto;
-    margin: 0 20px;
-    max-height: calc(100vh - 8rem);
-  }
-  
-  .card-footer {
-    background-color: white;
-    position: fixed;
-    bottom: 0;
-    width: 100%;
-  }
-
-  .card-body::-webkit-scrollbar {
-    width: 0.5em;
-  }
+.card-body::-webkit-scrollbar {
+  width: 0.5em;
+}
