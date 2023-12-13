@@ -52,7 +52,7 @@ class AuthController extends Controller
             'role_id' => 'required|integer|in:2,3',
             'email' => 'required|string|email|max:255|unique:users',
             'password' => 'required|string|min:6',
-            'image_url' => 'image|mimes:jpeg,png,jpg,gif|max:2048',
+            // 'image_url' => 'image|mimes:jpeg,png,jpg,gif|max:2048',
         ]);
 
 
@@ -65,7 +65,7 @@ class AuthController extends Controller
             'role_id' => $request->role_id,
             'latitude' => $request->latitude,
             'longitude' => $request->longitude,
-            'image_url' => $imageUrl,
+            // 'image_url' => $imageUrl,
         ]);
         if ($request->role_id == 3) {
             Driver::create([

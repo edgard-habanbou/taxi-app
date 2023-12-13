@@ -1,5 +1,6 @@
 // components/ChatForm.jsx
 import React, { useState } from "react";
+import './index.css';
 
 const ChatForm = ({ user, onMessageSent }) => {
   const [newMessage, setNewMessage] = useState("");
