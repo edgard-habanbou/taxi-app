@@ -5,7 +5,6 @@ import './index.css'
 import { useState } from 'react'
 
 function Row({ user, stats, index }) {
-  console.log(user)
   const [Loading, setLoading] = useState(false)
 
   const handleStatusUpdate = (acceptedValue) => {

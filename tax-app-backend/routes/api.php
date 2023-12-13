@@ -42,8 +42,9 @@ Route::patch('/update_rating/{rating_id}', [RatingController::class, 'update_rat
 Route::get('/messages/{id}', [TempChatController::class, 'fetchMessages']);
 Route::post('/messages/{id}', [TempChatController::class, 'sendMessage']);
 
-Route::get('/support/{id}', [SupportMessageController::class, 'fetchMessages']);
-Route::post('/support', [SupportMessageController::class, 'sendMessage']);
+Route::post('/support', [SupportMessageController::class, 'fetchMessages']);
+Route::post('/send_support_message', [SupportMessageController::class, 'sendMessage']);
+Route::post('/create_chat', [SupportMessageController::class, 'createChat']);
 
 Route::post('/update_request_location', [RequestController::class, 'updateLocation']);
 Route::post('/create_request', [RequestController::class, 'createRequest']);

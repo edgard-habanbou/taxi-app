@@ -90,4 +90,8 @@ class User extends Authenticatable implements JWTSubject
     {
         return $this->hasMany(SupportMessage::class);
     }
+    public function adminChat()
+    {
+        return $this->hasMany(AdminChat::class);
+    }
 }
