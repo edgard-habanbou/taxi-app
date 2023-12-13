@@ -1,9 +1,10 @@
 <?php
 
+use App\Http\Controllers\AuthController;
+use App\Http\Controllers\TempChatController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
-use App\Http\Controllers\AuthController;
 use App\Http\Controllers\RequestController;
 
 /*
@@ -27,11 +28,18 @@ Route::post('/update_location', [UserController::class, 'updateLocation']);
 Route::post('/update_status' , [DriverController::class , 'update']);
 
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
+
+
+Route::controller(AuthController::class)->group(function () {
+    Route::post('login', 'login');
+    Route::post('register', 'register');
+    Route::post('logout', 'logout');
+    Route::post('refresh', 'refresh');
 });
 
 Route::post('/update_request_location', [RequestController::class, 'updateLocation']);
 Route::post('/create_request', [RequestController::class, 'createRequest']);
 Route::post('/update_request_status', [RequestController::class, 'updateStatus']);
 Route::post('/update_request_driver', [RequestController::class, 'updateDriver']);
+Route::get('/messages/{id}', [TempChatController::class, 'fetchMessages']);
+Route::post('/messages', [TempChatController::class, 'sendMessage']);

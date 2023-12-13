@@ -24,6 +24,7 @@ class User extends Authenticatable implements JWTSubject
         'gender',
         'password',
         'role_id',
+        'gender',
         'latitude',
         'longitude',
         'image_url',
@@ -82,10 +83,10 @@ class User extends Authenticatable implements JWTSubject
     }
     public function tempChat()
     {
-        return $this->hasOne(TempChat::class);
+        return $this->hasMany(TempChat::class);
     }
     public function supportMessage()
     {
-        return $this->hasOne(SupportMessage::class);
+        return $this->hasMany(SupportMessage::class);
     }
 }
