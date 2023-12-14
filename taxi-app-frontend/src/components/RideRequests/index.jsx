@@ -37,7 +37,7 @@ const RideRequests = ({ rideRequests, directions, userType }) => {
           },
         }
       );
-      console.log(response.data);
+      // console.log(response.data);
       // const acceptedRequest = requests.filter((request) => request.id === requestId);
       // setRequests(acceptedRequest);
       console.log(`Request with ID ${id} accepted successfully.`);
@@ -91,7 +91,7 @@ const RideRequests = ({ rideRequests, directions, userType }) => {
               </tr>
               <tr>
                 <td colSpan="2">
-                  {userType === 3 && request.status == 1 && (
+                  {userType === 3 && request.status === 1 && (
                     <button
                       className="accept-button"
                       onClick={() => acceptRequest(request.id)}
@@ -100,13 +100,24 @@ const RideRequests = ({ rideRequests, directions, userType }) => {
                       {loading ? "Accepting..." : "Accept Ride"}
                     </button>
                   )}
-                  <button
-                    className="cancel-button"
-                    onClick={() => cancelRequest(request.id)}
-                    disabled={loading}
-                  >
-                    {loading ? "Cancelling..." : "Cancel Ride"}
-                  </button>
+                  {userType === 2 && (
+                    <button
+                      className="cancel-button"
+                      onClick={() => cancelRequest(request.id)}
+                      disabled={loading}
+                    >
+                      {loading ? "Cancelling..." : "Cancel Ride"}
+                    </button>
+                  )}
+                  {userType === 3 && request.status === 2 && (
+                    <button
+                      className="cancel-button"
+                      onClick={() => cancelRequest(request.id)}
+                      disabled={loading}
+                    >
+                      {loading ? "Cancelling..." : "Cancel Ride"}
+                    </button>
+                  )}
                   {loading && <div className="loading"></div>}
                 </td>
               </tr>

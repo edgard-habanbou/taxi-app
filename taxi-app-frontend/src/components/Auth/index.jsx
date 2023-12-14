@@ -17,9 +17,11 @@ const Auth = () => {
   const [password, setPassword] = useState("");
   const [gender, setGender] = useState("1");
   const [role_id, setRole] = useState("2");
+  const [Loading, setLoading] = useState(false);
 
   const loginHandler = async (event) => {
     event.preventDefault();
+    setLoading(true);
     axios
       .post(
         "http://localhost:8000/api/login",
@@ -34,19 +36,21 @@ const Auth = () => {
         localStorage.setItem("jwt", res.data.authorisation.token);
         const auth = JSON.stringify(res.data.user);
         localStorage.setItem("user", auth);
-        console.log(auth);
         dispatch(authActions.login());
       })
       .catch((err) => {
-        alert("Invalid username or password");
         setEmail("");
         setPassword("");
         return;
+      })
+      .finally(() => {
+        setLoading(false);
       });
   };
 
   const signUpHandler = (event) => {
     event.preventDefault();
+    setLoading(true);
     axios
       .post(
         "http://localhost:8000/api/register",
@@ -63,10 +67,12 @@ const Auth = () => {
         dispatch(authActions.login());
       })
       .catch((err) => {
-        alert("Invalid username or password");
         // setEmail("");
         // setPassword("");
         return;
+      })
+      .finally(() => {
+        setLoading(false);
       });
   };
 
@@ -102,6 +108,13 @@ const Auth = () => {
 
   return (
     <div className={"auth"}>
+      {Loading ? (
+        <div className="loading-container">
+          <div className="loader"></div>
+        </div>
+      ) : (
+        ""
+      )}
       <form onSubmit={isSignUp ? signUpHandler : loginHandler}>
         {isSignUp ? (
           <>

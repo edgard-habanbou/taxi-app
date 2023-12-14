@@ -6,13 +6,16 @@ import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
 import { authActions } from "../../store/auth";
 import { useNavigate } from "react-router-dom";
+import { useState } from "react";
 const Driver = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const token = localStorage.getItem("jwt");
   const localUser = localStorage.getItem("jwt");
+  const [Loading, setLoading] = useState(false);
 
   const verify = async () => {
+    setLoading(true);
     try {
       const response = await axios.get("http://localhost:8000/api/verify", {
         headers: {
@@ -35,6 +38,7 @@ const Driver = () => {
       dispatch(authActions.logout());
       navigate("/");
     }
+    setLoading(false);
   };
 
   useEffect(() => {
@@ -45,7 +49,13 @@ const Driver = () => {
 
   return (
     <>
-      {user ? <MapController userType={3}></MapController> : <p>forbidden</p>}
+      {user ? (
+        <MapController userType={3}></MapController>
+      ) : (
+        <div className="loading-container">
+          <div className="loader"></div>
+        </div>
+      )}
     </>
   );
 };
