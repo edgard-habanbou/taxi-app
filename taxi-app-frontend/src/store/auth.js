@@ -1,21 +1,32 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const localUser = localStorage.getItem("user");
-let user = null;
+const requestId = localStorage.getItem("requestId");
+let user = null,
+  role_id = null,
+  latitude = null,
+  longitude = null,
+  request_id = null;
 let auth = false;
 
 if (localUser) {
-  user = {
-    role_id: localUser.role_id,
-    latitude: localUser.latitude,
-    longitude: localUser.longitude,
-  };
+  role_id = localUser.role_id;
+  latitude = localUser.latitude;
+  longitude = localUser.longitude;
+
   auth = true;
+}
+if (requestId) {
+  request_id = requestId;
 }
 
 const initialAuthState = {
   isAuthenticated: auth,
-  user: user,
+  user,
+  role_id,
+  latitude,
+  longitude,
+  request_id,
 };
 
 const authSlice = createSlice({
@@ -30,6 +41,12 @@ const authSlice = createSlice({
     },
     setUser(state, action) {
       state.user = action.payload;
+    },
+    setRole(state, action) {
+      state.role_id = action.payload;
+    },
+    setRequestId(state, action) {
+      state.request_id = action.payload;
     },
   },
 });
