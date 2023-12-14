@@ -1,0 +1,28 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  background-color: white;
+  position: relative;
+}
+
+.card-body {
+  overflow-y: auto;
+  overflow-x: hidden;
+  margin: 0 20px;
+}
+
+.card-footer {
+  background-color: white;
+  bottom: 0;
+  width: 100%;
+}
+
+.card-body::-webkit-scrollbar {
+  width: 0.5em;
+}

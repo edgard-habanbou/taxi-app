@@ -1,0 +1,18 @@
+.red {
+  background-color: red;
+}
+.green {
+  background-color: rgb(4, 192, 4);
+}
+.grey {
+  background-color: grey;
+}
+.btn {
+  border: none;
+  border-radius: 5px;
+  padding: 5px 10px;
+  cursor: pointer;
+  text-align: center;
+  height: 35px;
+  width: 95px;
+}

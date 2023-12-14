@@ -20,9 +20,9 @@ return new class extends Migration
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->unsignedBigInteger('role_id');
-            $table->string('latitude');
-            $table->string('longitude');
-            $table->string('image_url');
+            $table->string('latitude')->nullable();
+            $table->string('longitude')->nullable();
+            $table->text('image_url')->nullable()->default('/images/default-avatar.png');
             $table->rememberToken();
             $table->timestamps();
         });

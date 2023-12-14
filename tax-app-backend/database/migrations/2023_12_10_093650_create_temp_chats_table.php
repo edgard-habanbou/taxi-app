@@ -19,7 +19,12 @@ return new class extends Migration
                 ->on("users")
                 ->onUpdate("cascade")
                 ->onDelete("cascade");
-
+            $table->unsignedBigInteger('request_id');
+            $table->foreign("request_id")
+                ->references("id")
+                ->on("requests")
+                ->onUpdate("cascade")
+                ->onDelete("cascade");
             $table->string('message', 255);
             $table->timestamps();
         });

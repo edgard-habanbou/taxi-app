@@ -11,6 +11,7 @@ class SupportMessage extends Model
     protected $fillable = [
         'user_id',
         'message',
+        'admin_chat_id'
     ];
     public function user()
     {

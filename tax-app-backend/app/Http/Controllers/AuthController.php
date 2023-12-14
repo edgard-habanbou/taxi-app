@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Driver;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -48,10 +49,12 @@ class AuthController extends Controller
             'fname' => 'required|string|max:255',
             'lname' => 'required|string|max:255',
             'gender' => 'required|integer',
-            'role_id' => 'required|integer',
+            'role_id' => 'required|integer|in:2,3',
             'email' => 'required|string|email|max:255|unique:users',
             'password' => 'required|string|min:6',
+            // 'image_url' => 'image|mimes:jpeg,png,jpg,gif|max:2048',
         ]);
+
 
         $user = User::create([
             'email' => $request->email,
@@ -62,10 +65,13 @@ class AuthController extends Controller
             'role_id' => $request->role_id,
             'latitude' => $request->latitude,
             'longitude' => $request->longitude,
-            'image_url' => $request->image_url,
-
-
+            'image_url' => $request->imageUrl,
         ]);
+        if ($request->role_id == 3) {
+            Driver::create([
+                'user_id' => $user->id,
+            ]);
+        }
 
         $token = Auth::login($user);
         return response()->json([
@@ -77,6 +83,29 @@ class AuthController extends Controller
                 'type' => 'bearer',
             ]
         ]);
+    }
+    
+    private function generateBase64Image($path)
+    {
+        $absolutePath = storage_path('app/' . $path);
+    
+        if (file_exists($absolutePath)) {
+            $data = file_get_contents($absolutePath);
+    
+            if ($data !== false) {
+                $type = pathinfo($absolutePath, PATHINFO_EXTENSION);
+    
+                $base64 = 'data:image/' . $type . ';base64,' . base64_encode($data);
+    
+                return $base64;
+            } else {
+                echo "Failed to read file contents.\n";
+            }
+        } else {
+            echo "File does not exist: $absolutePath";
+        }
+    
+        return null;
     }
 
     public function logout()
@@ -99,4 +128,16 @@ class AuthController extends Controller
             ]
         ]);
     }
+    
+    public function upload_image(Request $req){
+        $user=Auth::user();
+        if ($req->hasFile('image_url')) {
+            $uploadedImage = $req->file('image_url');
+            $path = $uploadedImage->store('public/images'); 
+            $imageUrl = $this->generateBase64Image($path);
+        } else {
+            $imageUrl = null;
+        }
+    }
+        
 }

@@ -13,11 +13,7 @@ class TempChat extends Model
         'request_id',
         'message',
     ];
-    public function passenger()
-    {
-        return $this->belongsTo(User::class);
-    }
-    public function driver()
+    public function user()
     {
         return $this->belongsTo(User::class);
     }
