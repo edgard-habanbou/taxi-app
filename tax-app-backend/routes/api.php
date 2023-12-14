@@ -30,16 +30,8 @@ Route::controller(AuthController::class)->group(function () {
     Route::post('upload_image', 'upload_image');
 });
 
-Route::get('/get_ratings/{user_id}', [RatingController::class, 'get_ratings']);
-Route::post('/add_rating', [RatingController::class, 'add_rating']);
-Route::delete('/delete_rating/{rating_id}', [RatingController::class, 'delete_rating']);
-Route::patch('/update_rating/{rating_id}', [RatingController::class, 'update_rating']);
 
-Route::get('/messages/{id}', [TempChatController::class, 'fetchMessages']);
-Route::post('/messages/{id}', [TempChatController::class, 'sendMessage']);
 
-Route::get('/support/{id}', [SupportMessageController::class, 'fetchMessages']);
-Route::post('/support', [SupportMessageController::class, 'sendMessage']);
 
 
 // Route for creating a user request
@@ -61,10 +53,11 @@ Route::get('/users', [UserController::class, 'index']);
 Route::post('/login', [AuthController::class, 'login']);
 Route::put('/update_user', [UserController::class, 'update']);
 Route::post('/destroy', [UserController::class, 'destroy']);
+
 Route::post('/update_location', [UserController::class, 'updateLocation']);
-Route::post('/update_picture',[UserController::class,'updatePicture']);
-Route::get('/show',[UserController::class,'show']);
-Route::post('/update_profile',[UserController::class,'updateProfile']);
+Route::post('/update_picture', [UserController::class, 'updatePicture']);
+Route::get('/show', [UserController::class, 'show']);
+Route::post('/update_profile', [UserController::class, 'updateProfile']);
 
 Route::post('/update_status', [DriverController::class, 'update']);
 Route::get('/verify', [UserController::class, 'verify']);
@@ -73,12 +66,11 @@ Route::post('/getpendingdrivers', [DriverController::class, 'getPendingDrivers']
 
 Route::post('/getstats', [StatsController::class, 'getStats']);
 
-
-
 Route::post('/update_request_location', [RequestController::class, 'updateLocation']);
 Route::post('/create_request', [RequestController::class, 'createRequest']);
 Route::post('/update_request_status', [RequestController::class, 'updateStatus']);
 Route::post('/update_request_driver', [RequestController::class, 'updateDriver']);
+
 Route::get('/messages/{id}', [TempChatController::class, 'fetchMessages']);
 Route::post('/messages/{id}', [TempChatController::class, 'sendMessage']);
 
@@ -86,6 +78,7 @@ Route::post('/support', [SupportMessageController::class, 'fetchMessages']);
 Route::post('/fetch_chats', [SupportMessageController::class, 'getChats']);
 Route::post('/send_support_message', [SupportMessageController::class, 'sendMessage']);
 Route::post('/create_chat', [SupportMessageController::class, 'createChat']);
+Route::post('/concludeChat', [SupportMessageController::class, 'concludeChat']);
 
 Route::get('/get_ratings/{user_id}', [RatingController::class, 'get_ratings']);
 Route::post('/add_rating', [RatingController::class, 'add_rating']);
