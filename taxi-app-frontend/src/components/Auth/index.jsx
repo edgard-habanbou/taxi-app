@@ -126,45 +126,47 @@ const Auth = () => {
               value={password}
               onChange={handlePasswordChange}
             />
-            <div>
-              <label>
-                <input
-                  type="radio"
-                  name="gender"
-                  value="1"
-                  onChange={handleGenderChange}
-                />
-                Male
-              </label>
-              <label>
-                <input
-                  type="radio"
-                  name="gender"
-                  value="0"
-                  onChange={handleGenderChange}
-                />
-                Female
-              </label>
-            </div>
-            <div>
-              <label>
-                <input
-                  type="radio"
-                  name="role"
-                  value="2"
-                  onChange={handleRoleChange}
-                />
-                Passenger
-              </label>
-              <label>
-                <input
-                  type="radio"
-                  name="role"
-                  value="3"
-                  onChange={handleRoleChange}
-                />
-                Driver
-              </label>
+            <div className="flex column center">
+              <div className="flex center">
+                <label>
+                  <input
+                    type="radio"
+                    name="gender"
+                    value="1"
+                    onChange={handleGenderChange}
+                  />
+                  Male
+                </label>
+                <label>
+                  <input
+                    type="radio"
+                    name="gender"
+                    value="0"
+                    onChange={handleGenderChange}
+                  />
+                  Female
+                </label>
+              </div>
+              <div className="flex center">
+                <label>
+                  <input
+                    type="radio"
+                    name="role"
+                    value="2"
+                    onChange={handleRoleChange}
+                  />
+                  Passenger
+                </label>
+                <label>
+                  <input
+                    type="radio"
+                    name="role"
+                    value="3"
+                    onChange={handleRoleChange}
+                  />
+                  Driver
+                </label>
+              </div>
             </div>
             <button>Sign Up</button>
             <p>

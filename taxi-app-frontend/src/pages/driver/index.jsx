@@ -1,12 +1,6 @@
 import React, { useEffect } from "react";
 import "./index.css";
-<<<<<<< HEAD
-import UserProfile from "../UserProfile";
-const Driver = () => {
-  return <>
-    <UserProfile/>
-  </>;
-=======
+
 import MapController from "../../components/MapController";
 import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
@@ -54,7 +48,6 @@ const Driver = () => {
       {user ? <MapController userType={3}></MapController> : <p>forbidden</p>}
     </>
   );
->>>>>>> map
 };
 
 export default Driver;

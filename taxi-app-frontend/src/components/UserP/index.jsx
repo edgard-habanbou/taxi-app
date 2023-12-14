@@ -56,7 +56,7 @@ const UserP = ({ fname, lname, email, gender, image }) => {
               alt="User"
               className="image"
             />
-            <input type="file" onChange={handleChange} />
+            <input type="file" onChange={handleChange} className="user-input" />
             <button type="submit" className="change-profile-button">
               Change profile
             </button>
@@ -74,16 +74,16 @@ const UserP = ({ fname, lname, email, gender, image }) => {
           <div className="right-container  design">
             <div className="input-container">
               <label>First Name:</label>
-              <input value={fname} className="fname" />
+              <input value={fname} className="fname user-input" />
               <label>Email:</label>
-              <input value={email} className="email" />
+              <input value={email} className="email user-input" />
             </div>
 
             <div className="input-container">
               <label>Last Name:</label>
-              <input value={lname} className="lname" />
+              <input value={lname} className="lname user-input" />
               <label>Gender:</label>
-              <input value={genderText} className="gender" />
+              <input value={genderText} className="gender user-input" />
             </div>
           </div>
         </div>
