@@ -57,6 +57,7 @@ const ChatM = ({ admin_chat_id, goToMain }) => {
         messages={messages}
         addMessage={addMessage}
         admin_chat_id={admin_chat_id}
+        goToMain={goToMain}
         user={localStorage.getItem('user')}
       />
     </div>

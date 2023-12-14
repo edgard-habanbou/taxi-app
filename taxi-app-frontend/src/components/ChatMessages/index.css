@@ -5,7 +5,7 @@ ul.chat {
   flex-direction: column;
 }
 
-.left {
+.leftSide {
   align-self: flex-start;
 }
 
@@ -37,7 +37,6 @@ ul.chat {
 
 .message-info {
   display: flex;
-  flex-direction: column;
 }
 
 .left .message-info {

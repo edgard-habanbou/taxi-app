@@ -10,13 +10,14 @@ const ChatForm = ({ user, onMessageSent }) => {
       user: user,
       fname: user.fname,
       lname: user.lname,
+      image_url: user.image_url,
       message: newMessage,
     });
     setNewMessage("");
   };
 
   return (
-    <div className="input-group">
+    <div className="input-group margin flex center">
       <input
         id="btn-input"
         type="text"
@@ -27,7 +28,7 @@ const ChatForm = ({ user, onMessageSent }) => {
         onChange={(e) => setNewMessage(e.target.value)}
         onKeyUp={(e) => e.key === "Enter" && sendMessage()}
       />
-      <span className="input-group-btn">
+      <span>
         <button
           className="buton btn btn-primary btn-sm"
           id="btn-chat"

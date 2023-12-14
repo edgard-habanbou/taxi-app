@@ -31,7 +31,6 @@ function Support() {
 
   useEffect(() => {
     fetchChats()
-    console.log(chats)
   }, [])
   return (
     <div>

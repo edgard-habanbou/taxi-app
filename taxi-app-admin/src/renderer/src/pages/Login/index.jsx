@@ -76,7 +76,7 @@ const Login = () => {
           placeholder="email"
           value={email}
           onChange={handleEmailChange}
-          onKeyDown={handleKeyPress}
+          onKeyUp={(e) => e.key === 'Enter' && loginHandler()}
         />
 
         <TextInput
@@ -85,6 +85,7 @@ const Login = () => {
           value={password}
           onChange={handlePasswordChange}
           onKeyDown={handleKeyPress}
+          onKeyUp={(e) => e.key === 'Enter' && loginHandler()}
         />
         <div className="flex center">
           <Button

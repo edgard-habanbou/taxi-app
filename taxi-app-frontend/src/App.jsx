@@ -16,8 +16,8 @@ function App() {
 
   return (
     <>
-      <Header />
       <Router>
+        <Header />
         <Routes>
           <Route
             path="/"
@@ -34,7 +34,6 @@ function App() {
           <Route path="/userprofile" element={<UserProfile />} />
           <Route path="/EditProfile" element={<EditProfile />} />
           <Route path="/Support" element={<Support />} />
-          <Route path="/driver" element={<Driver></Driver>} />
         </Routes>
       </Router>
     </>

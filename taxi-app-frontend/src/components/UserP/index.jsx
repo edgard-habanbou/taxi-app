@@ -33,9 +33,7 @@ const UserP = ({ fname, lname, email, gender, image }) => {
     };
     axios
       .post(url, formData, config)
-      .then((response) => {
-        console.log(response.data);
-      })
+      .then((response) => {})
       .catch((error) => {
         console.error(error);
       });

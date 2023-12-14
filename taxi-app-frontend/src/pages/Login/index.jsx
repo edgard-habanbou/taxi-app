@@ -34,7 +34,6 @@ const Login = () => {
         window.location.href = "/userprofile";
       })
       .catch((err) => {
-        alert("Invalid username or password");
         setEmail("");
         setPassword("");
         return;

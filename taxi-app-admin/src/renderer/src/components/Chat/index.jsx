@@ -3,7 +3,7 @@ import ChatForm from '../ChatForm'
 import PropTypes from 'prop-types'
 import './index.css'
 
-const Chat = ({ messages, addMessage, user, admin_chat_id }) => {
+const Chat = ({ messages, addMessage, user, admin_chat_id, goToMain }) => {
   return (
     <div className="container">
       <div className="card">
@@ -11,7 +11,12 @@ const Chat = ({ messages, addMessage, user, admin_chat_id }) => {
           <ChatMessages messages={messages} />
         </div>
         <div className="card-footer">
-          <ChatForm onMessageSent={addMessage} user={user} admin_chat_id={admin_chat_id} />
+          <ChatForm
+            onMessageSent={addMessage}
+            user={user}
+            admin_chat_id={admin_chat_id}
+            goToMain={goToMain}
+          />
         </div>
       </div>
     </div>

@@ -4,12 +4,11 @@ import "./index.css";
 
 const ChatMessages = ({ messages }) => {
   const user = JSON.parse(localStorage.getItem("user"));
-  console.log(user.id);
   return (
     <ul className="chat">
       {messages.map((message, index) => {
         let user_id = message.user_id;
-        const isCurrentUser = user_id === user.id ? "right" : "left";
+        const isCurrentUser = user_id === user.id ? "right" : "leftSide";
         return (
           <li className={`${isCurrentUser} list-el`} key={index}>
             <div className="clearfix">

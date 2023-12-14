@@ -14,7 +14,7 @@ const ChatMessages = ({ messages }) => {
             <div className="clearfix">
               <div className="message-info">
                 <div className="pp">
-                  <img className="user-image" src={message.image_url} />
+                  <img className="user-image" src={`http://localhost:8000${message.image_url}`} />
                 </div>
                 <div className="user">
                   <p>{message.fname + ' ' + message.lname}</p>
