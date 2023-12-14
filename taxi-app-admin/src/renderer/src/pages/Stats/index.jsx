@@ -23,6 +23,7 @@ function Stats() {
       .then((res) => {
         setStats(res.data.data)
         setDriverRating(res.data.data.driverAverageRatings)
+        console.log(res.data.data)
       })
       .catch((err) => {
         console.log(err)

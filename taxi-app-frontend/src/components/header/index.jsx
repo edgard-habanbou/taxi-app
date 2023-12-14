@@ -12,7 +12,6 @@ const Header = () => {
   const storedUser = localStorage.getItem("user");
   const user = JSON.parse(storedUser);
   const roleId = user?.role_id;
-  console.log(roleId);
 
   const logoutHandler = () => {
     localStorage.removeItem("jwt");
@@ -26,7 +25,10 @@ const Header = () => {
   };
 
   const GoToRide = () => {
-    if (roleId === 2) {
+    const storedUser = localStorage.getItem("user");
+    const user = JSON.parse(storedUser);
+    const roleId = user?.role_id;
+    if (roleId === 3) {
       navigate("/driver");
     } else {
       navigate("/passenger");

@@ -26,7 +26,7 @@ class StatsController extends Controller
             $DriverAverageRatings = DB::table('ratings')
                 ->join('users', 'ratings.rated_user_id', '=', 'users.id')
                 ->select('ratings.rated_user_id', 'users.fname', 'users.lname', DB::raw('AVG(ratings.rating) as average_rating'))
-                ->where("role_id", 1)
+                ->where("role_id", 3)
                 ->groupBy('ratings.rated_user_id', 'users.fname', 'users.lname')
                 ->get();
             $data = [

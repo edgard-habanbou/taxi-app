@@ -326,7 +326,16 @@ function Map({ markers, usertype, passengers, driverLocation }) {
           >
             {pass?.map((element) => {
               return (
-                <Marker position={element.origin} label={"hello"}></Marker>
+                <>
+                  <Marker
+                    position={element.origin}
+                    label={element.id + " Origin"}
+                  ></Marker>
+                  <Marker
+                    position={element.destination}
+                    label={element.id + " Destination"}
+                  ></Marker>
+                </>
               );
             })}
             {markers && markers}

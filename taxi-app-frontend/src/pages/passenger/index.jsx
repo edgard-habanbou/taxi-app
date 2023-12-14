@@ -5,8 +5,10 @@ import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
 import { authActions } from "../../store/auth";
 import { useNavigate } from "react-router-dom";
+import { useState } from "react";
 const Passenger = () => {
   const dispatch = useDispatch();
+  const [Loading, setLoading] = useState(false);
   const user = useSelector((state) => state.auth.isAuthenticated);
   const role_id = useSelector((state) => state.auth.role_id);
   const navigate = useNavigate();
@@ -14,6 +16,7 @@ const Passenger = () => {
   const localUser = localStorage.getItem("user");
 
   const verify = async () => {
+    setLoading(true);
     try {
       const response = await axios.get("http://localhost:8000/api/verify", {
         headers: {
@@ -30,6 +33,7 @@ const Passenger = () => {
       dispatch(authActions.logout());
       navigate("/");
     }
+    setLoading(false);
   };
 
   useEffect(() => {
@@ -41,7 +45,9 @@ const Passenger = () => {
       {user && role_id == 2 ? (
         <MapController userType={2}></MapController>
       ) : (
-        <p>forbidden</p>
+        <div className="loading-container">
+          <div className="loader"></div>
+        </div>
       )}
     </>
   );

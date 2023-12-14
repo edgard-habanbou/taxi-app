@@ -36,7 +36,7 @@ function MapController({ userType }) {
         );
       }
     } catch (error) {
-      console.error(error);
+      // console.error(error);
     }
   };
 
