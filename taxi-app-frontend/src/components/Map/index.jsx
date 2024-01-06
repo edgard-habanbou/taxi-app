@@ -14,7 +14,7 @@ const libraries = ["places"];
 
 function Map({ markers, usertype, passengers, driverLocation }) {
   const { isLoaded } = useJsApiLoader({
-    googleMapsApiKey: "AIzaSyDx2H1dZlL5-SlO8GlFDytxRZUh6sovXQc",
+    googleMapsApiKey: "AIzaSyCTaFrbw8a6Ttm1qdEhXjvqCr3M6xF5U94",
     libraries,
   });
   const [center, setCenter] = useState({ lat: 33.8938, lng: 35.5018 });
